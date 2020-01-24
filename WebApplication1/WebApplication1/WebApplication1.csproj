@@ -256,12 +256,12 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
-    <Content Include="Vue\Images\Image1.jpg" />
-    <Content Include="Vue\Images\Image2.jpg" />
+    <Content Include="Content\Vue.css" />
+    <Content Include="Vue\components\mainapp.js" />
+    <Content Include="Vue\Images\Image1.JPG" />
+    <Content Include="Vue\Images\Image2.png" />
     <Content Include="Vue\Images\Image3.jpg" />
     <Content Include="Vue\Images\Image4.jpg" />
-    <Content Include="Content\Vue.css" />
-    <Content Include="Vue\mainapp\mainapp.js" />
     <Content Include="Vue\templates\mainpage.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -288,7 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Vue\components\" />
+    <Folder Include="Vue\mainapp\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
