@@ -4,7 +4,7 @@ Vue.component('slideshow', {
     //UPDATES IMG SRC THROUGH THE COMPONENT SYNTAX ON HTML PAGE
     data: function () {
         return {
-            imgs: "..Vue/images/Image1.jpg",
+            imgs: "/Vue/images/Image1.jpg",
             title: "Some Pretty Pictures",
             increment: 0
         };
@@ -21,10 +21,10 @@ Vue.component('slideshow', {
 
 
             //Put in fully qualified path names here and then test it. Still borked, having problem with relative paths
-            var Images = ["..Vue/images/Image1.jpg",
-                "..Vue/images/Image2.jpg",
-                "..Vue/images/Image3.jpg",
-                "..Vue/images/Image4.jpg"];
+            var Images = ["/Vue/images/Image1.jpg",
+                "/Vue/images/Image2.jpg",
+                "/Vue/images/Image3.jpg",
+                "/Vue/images/Image4.jpg"];
 
             if (this.increment === Images.length) { this.increment = 0; }
 
