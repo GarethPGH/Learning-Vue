@@ -1,7 +1,21 @@
-﻿
+﻿var App = new Vue({
+    el: "app",
+    //Borked, cant get thumbnails to happen
+    components: {
+        slideshow: "slideshow"
+    },
+    //This is supposed to show up on the mainpage as thumbnail images under the slideshow but does not
+    data() {
+        return {
+            pics: [{ picture: "/Vue/images/Image1.jpg" },
+            { picture: "/Vue/images/Image2.jpg" },
+            { picture: "/Vue/images/Image3.jpg" },
+            { picture: "/Vue/images/Image4.jpg" }]
+        };
+    }
+});
+//Updates slideshow image src and loops indefinitely after button press
 Vue.component('slideshow', {
-
-    //UPDATES IMG SRC THROUGH THE COMPONENT SYNTAX ON HTML PAGE
     data: function () {
         return {
             imgs: "/Vue/images/Image1.jpg",
@@ -15,12 +29,7 @@ Vue.component('slideshow', {
         ChangeImage: function () {
 
             console.log("in change image");
-            //now I need to figure out how to add images dynamically to a collection for 
-            //the slideshow to run on, and or, use a collection of user submitted images
-            //will require a Form, and typical CRUD 
 
-
-            //Put in fully qualified path names here and then test it. Still borked, having problem with relative paths
             var Images = ["/Vue/images/Image1.jpg",
                 "/Vue/images/Image2.jpg",
                 "/Vue/images/Image3.jpg",
@@ -32,7 +41,6 @@ Vue.component('slideshow', {
             this.increment++;
 
             console.log(this.imgs);
-
         }
     },
 
@@ -42,5 +50,6 @@ Vue.component('slideshow', {
             + '<div>' + '<button type="button" v-on:click="window.setInterval(ChangeImage,5000);">Click Me</button>' + '</div>' + '</div>'
     
 });
-new Vue({ el: '#slides' });
+
+
 

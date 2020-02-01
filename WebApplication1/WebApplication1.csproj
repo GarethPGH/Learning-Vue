@@ -262,6 +262,7 @@
     <Content Include="Vue\images\Image2.jpg" />
     <Content Include="Vue\images\Image3.jpg" />
     <Content Include="Vue\images\Image4.jpg" />
+    <Content Include="Vue\templates\Form.html" />
     <Content Include="Vue\templates\mainpage.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
