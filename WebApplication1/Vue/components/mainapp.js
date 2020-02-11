@@ -9,26 +9,38 @@
         imageform: "add_image"
     },
     //This is supposed to show up on the mainpage as thumbnail images under the slideshow but does not
-    model:{
+    model: {
+        image: {
+            name: "",
+            computed: {
+                url() {
+                    return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
+                    //this will need to be changed to underlying database routing 
+                },
+            },
+        }
+    },
+    //this probably needs to be rewritten
+    props: {
 
         computed: {
             img() {
                 return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
-        },
+            },
+        }
         pics: {
             type: Array[img],
             default: [{ picture: "no image" }]
-            }
-        },
-
+        }
+    },
+        
+    //right now this is hardcoded
     data:{
-        pics: {
-            ["/Vue/images/Image1.jpg",
-            "/Vue/images/Image2.jpg",
-            "/Vue/images/Image3.jpg",
-            "/Vue/images/Image4.jpg"]}
-    }
-
+        pics: ["/Vue/images/Image1.jpg",
+               "/Vue/images/Image2.jpg",
+               "/Vue/images/Image3.jpg",
+               "/Vue/images/Image4.jpg"]
+    },
 });
 //Updates slideshow image src and loops indefinitely after button press
 Vue.component('slideshow', {
