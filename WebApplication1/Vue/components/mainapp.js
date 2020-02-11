@@ -1,18 +1,34 @@
 ﻿var App = new Vue({
     el: "app",
     //Borked, cant get thumbnails to happen
+    //******* Figure out how to use Vue props and data *********
+    //***** May need to figure out how to use module.exports and export default 
     components: {
-        slideshow: "slideshow"
+        slideshow: "slideshow",
+        thumbs: "thumbs",
+        imageform: "add_image"
     },
     //This is supposed to show up on the mainpage as thumbnail images under the slideshow but does not
-    data() {
-        return {
-            pics: [{ picture: "/Vue/images/Image1.jpg" },
-            { picture: "/Vue/images/Image2.jpg" },
-            { picture: "/Vue/images/Image3.jpg" },
-            { picture: "/Vue/images/Image4.jpg" }]
-        };
+    model:{
+
+        computed: {
+            img() {
+                return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
+        },
+        pics: {
+            type: Array[img],
+            default: [{ picture: "no image" }]
+            }
+        },
+
+    data:{
+        pics: {
+            ["/Vue/images/Image1.jpg",
+            "/Vue/images/Image2.jpg",
+            "/Vue/images/Image3.jpg",
+            "/Vue/images/Image4.jpg"]}
     }
+
 });
 //Updates slideshow image src and loops indefinitely after button press
 Vue.component('slideshow', {
@@ -45,11 +61,14 @@ Vue.component('slideshow', {
     },
 
     template: 
-        '<div>' + '<div>' + '<img width="500" height="500" v-bind:src="imgs" />' + '</div>'
+        '<div class="slideshow">' + '<div>' + '<img width="500" height="500" v-bind:src="imgs" />' + '</div>'
             + '<div>' + '{{title}}' + '</div>'
             + '<div>' + '<button type="button" v-on:click="window.setInterval(ChangeImage,5000);">Click Me</button>' + '</div>' + '</div>'
     
 });
 
+Vue.component('thumbs', function () {
+    template: "<div class='thumbs'>"+"<img v-for='pic in pics' : src='pic.picture' height='5%' width='5%' />"+"</div>"
+});
 
 
