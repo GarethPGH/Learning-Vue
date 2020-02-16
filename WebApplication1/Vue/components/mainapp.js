@@ -6,41 +6,53 @@
     components: {
         slideshow: "slideshow",
         thumbs: "thumbs",
-        imageform: "add_image"
+        
     },
     //This is supposed to show up on the mainpage as thumbnail images under the slideshow but does not
     model: {
-        image: {
-            name: "",
-            computed: {
-                url() {
-                    return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
-                    //this will need to be changed to underlying database routing 
-                },
-            },
-        }
-    },
-    //this probably needs to be rewritten
-    props: {
+        imageName: "", 
 
         computed: {
-            img() {
+            imageUrl() {
                 return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
-            },
+                //this will need to be changed to underlying database routing 
+            }
         }
-        pics: {
-            type: Array[img],
-            default: [{ picture: "no image" }]
+       
+    },
+    ////this probably needs to be rewritten
+    //props: {
+
+    //    computed: {
+    //        img() {
+    //            return "./Vue/images/${encodeURIComponent(this.name)}.jpg";
+    //        }
+    //    },
+    //    pics: {
+    //        type: Array[img],
+    //        default: [{ picture: "no image" }]
+    //    }
+    //},
+
+    methods: {
+        warn: function () {
+            if (event) {
+                event.stopPropagation();
+                console.log("Name: " + this.name + "URL: " + this.url);
+            }
+            else { console.log("event was not stopped"); }
         }
     },
         
-    //right now this is hardcoded
-    data:{
-        pics: ["/Vue/images/Image1.jpg",
+    //right now this is hardcoded, and not being used
+    data: {
+        name: "",
+        url: "",
+        pictures: ["/Vue/images/Image1.jpg",
                "/Vue/images/Image2.jpg",
                "/Vue/images/Image3.jpg",
                "/Vue/images/Image4.jpg"]
-    },
+    }
 });
 //Updates slideshow image src and loops indefinitely after button press
 Vue.component('slideshow', {
@@ -80,7 +92,7 @@ Vue.component('slideshow', {
 });
 
 Vue.component('thumbs', function () {
-    template: "<div class='thumbs'>"+"<img v-for='pic in pics' : src='pic.picture' height='5%' width='5%' />"+"</div>"
+    template: "<div class='thumbs'>" + "<img v-for='pic in pics' : src='pic.picture' height='5%' width='5%' />" + "</div>";
 });
 
 
