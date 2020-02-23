@@ -1,4 +1,10 @@
-﻿var App = new Vue({
+﻿//!!!!!!!!!!!!!!!Important. Currently testing saved state using pictures.js. Figure out how to add pictures to pictures.js and see if it will grow
+//!!!!!!!!!!!!Console.log your results  to see the array grow. Use it to display them on the page
+import pictures from "./Vue/components/pictures.js";
+//ESLint error "unexpected use of filename extension". I may have to use webpack after all because, it seems hard to find the .NET answer for unresolved filenames and ESLint
+//so might have to blow away and rewrite app, but persisting this code just to resolve this issue
+var App = new Vue({
+    
     el: "app",
     //Borked, cant get thumbnails to happen
     //******* Figure out how to use Vue props and data *********
@@ -6,9 +12,16 @@
     components: {
         slideshow: "slideshow",
         thumbs: "thumbs",
+        picture: "picture"
         
     },
-    //This is supposed to show up on the mainpage as thumbnail images under the slideshow but does not
+    //possibly not needed
+    data: {
+        name: "",
+        url: "",
+    },
+    //will hopefully be used in a form to let users add pictures to the slideshow.
+    //added pictures are to be stored in pictures.js as new instances of picture
     model: {
         imageName: "", 
 
@@ -21,6 +34,7 @@
        
     },
     ////this probably needs to be rewritten
+    //also may not be needed
     //props: {
 
     //    computed: {
@@ -42,17 +56,12 @@
             }
             else { console.log("event was not stopped"); }
         }
+        //Add a get picture, using pictures.getters
+
+        //Add a set picture, using pictures.setters
+        //as a new pictures.picture();
     },
-        
-    //right now this is hardcoded, and not being used
-    data: {
-        name: "",
-        url: "",
-        pictures: ["/Vue/images/Image1.jpg",
-               "/Vue/images/Image2.jpg",
-               "/Vue/images/Image3.jpg",
-               "/Vue/images/Image4.jpg"]
-    }
+
 });
 //Updates slideshow image src and loops indefinitely after button press
 Vue.component('slideshow', {
@@ -90,7 +99,22 @@ Vue.component('slideshow', {
             + '<div>' + '<button type="button" v-on:click="window.setInterval(ChangeImage,5000);">Click Me</button>' + '</div>' + '</div>'
     
 });
+Vue.component('picture', function () {
+    //this component is only here to test picture.js as a data store for persisting state. 
+    //I will be learning how to use vuex for the remainder of the project
 
+    methods: {
+        getPics = function () {
+            return {
+                pics: pictures.pictures
+            };
+        },
+
+        setPics = function () {
+
+        }
+    }
+});
 Vue.component('thumbs', function () {
     template: "<div class='thumbs'>" + "<img v-for='pic in pics' : src='pic.picture' height='5%' width='5%' />" + "</div>";
 });

@@ -258,6 +258,7 @@
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
     <Content Include="Vue\components\mainapp.js" />
+    <Content Include="Vue\components\pictures.js" />
     <Content Include="Vue\images\Image1.jpg" />
     <Content Include="Vue\images\Image2.jpg" />
     <Content Include="Vue\images\Image3.jpg" />
