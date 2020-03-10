@@ -257,14 +257,6 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
-    <Content Include="Vue\components\mainapp.js" />
-    <Content Include="Vue\components\pictures.js" />
-    <Content Include="Vue\images\Image1.jpg" />
-    <Content Include="Vue\images\Image2.jpg" />
-    <Content Include="Vue\images\Image3.jpg" />
-    <Content Include="Vue\images\Image4.jpg" />
-    <Content Include="Vue\templates\Form.html" />
-    <Content Include="Vue\templates\mainpage.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -290,7 +282,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Vue\mainapp\" />
+    <Folder Include="Vue\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
