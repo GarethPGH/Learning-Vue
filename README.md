@@ -21,9 +21,9 @@
 <br />
 3:) Thought I could use what I learned from the beginner course in Vue Mastery to create my own application. It quickly became confusing with multiple files, how properly to architect the app and figure out what file, should touch what file. (WebApplication1 folder)  
 <br />
-4:) Attempted to scale back to simple hello world type app to examine how Vue handles dataflow. It did not work. 
+4:) Attempted to scale back to simple "hello world" type app to examine how Vue handles dataflow, using simple data options between two files, console.log(proof that the changes were being made). It did not work, possibly due to VS2019 issues listed above 
 <br />
-5:) Switched to Travery Media's Vue JS Todo App: https://www.youtube.com/watch?v=Wy9q22isx3U&t=3528s <br />
+5:) Switched to Travery Media's Vue JS Todo App, using VSCode and NPM: https://www.youtube.com/watch?v=Wy9q22isx3U&t=3528s <br />
 App does not work once you add JSONPlaceholder to your dependancies to simulate an HTTP back end. I am getting an error that my Todos property (referring to my Todo Import statement in Vue.app) is not reactive. However, it was, at the time, written exactly as the tutorial had it written. I have made some changes to point directly at my import statements, but I don't know what is causing the problem. AddTodo does not add Todos to the list, and Created() method in App.vue does not pull data from JSONPlaceholder (VuejsApp1 folder)
 <br />
 Am currently trying to find out the answer to my questions, and am heavily focusing on the documentation at Vuejs.org
