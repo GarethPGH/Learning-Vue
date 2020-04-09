@@ -13,7 +13,6 @@
 <br />
  4:)Vue-Cli has a UI; vue ui command in the terminal. Use it. I fixed a configuration issue I spent 7 hours over the course of two days trying to figure out, in 5 minutes by navigating a couple menus.
 <br />
-<br />
 ### What I built:  
 1:) Managed to create a hard-coded Vue slideshow in VS 2019. I could not successfully use it as a component. There were pathing issues. 
 <br />
@@ -27,7 +26,6 @@
 App does not work once you add JSONPlaceholder to your dependancies to simulate an HTTP back end. I am getting an error that my Todos property (referring to my Todo Import statement in Vue.app) is not reactive. However, it was, at the time, written exactly as the tutorial had it written. I have made some changes to point directly at my import statements, but I don't know what is causing the problem. AddTodo does not add Todos to the list, and Created() method in App.vue does not pull data from JSONPlaceholder (VuejsApp1 folder)
 <br />
 Am currently trying to find out the answer to my questions, and am heavily focusing on the documentation at Vuejs.org
-<br />
 <br />
 ### Goals:
 <br />
