@@ -1,8 +1,9 @@
 <template>
     <div id="app">
-        <Header/>
-        <AddTodo v-on:add-todo="addTodo"/>
-        <Todos v-bind:todos="Todos" v-on:del-todo ="deleteTodo"/>    
+        <Header></Header>
+        <AddTodo v-on:add-todo="addTodo" />
+        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+
     </div>
 </template>
 
@@ -13,39 +14,39 @@
     import axios from "axios";
 
 //Todo is referenced on render but not reactive
-
+//Open this website and read: https://michaelnthiessen.com/property-or-method-not-defined/
     export default {
         name: 'app',
 
         components: {
             Header: Header,
             Todos: Todos,
-            AddTodo: AddTodo
+            AddTodo: AddTodo,
         },
+
         data() {
             return {
-                todos:[
-                    {id:1,
-                    title:"Title1",
-                    completed:false},
-                
-                    {id:2,
-                    title:"Title2",
-                    completed:false},
-
-                    {id:3,
-                    title:"Title3",
-                    completed:false}
-                ]
+                todos: []
             }
         },
+    //Created is supposedly to run as soon as app is mounted, but doesn't.
         methods: {
             created(){
-                axios.get('http://jsonplaceholder.typicode.com/todos?_limit=10')
-                    .then(res => this.todos = res.data)
-                    .catch(err => console.log(err));
-            },
+              axios.get('http://jsonplaceholder.typicode.com/todos?_limit=10')
+                   .then(res => this.todos = res.data)
+                   .catch(err => console.log(err));
+             },
     
+           //Delete todo does not work. 
+           //I am not sure if the del-todo is being emitted as it is supposed to, 
+           //or if there is an issue with the deleteTodo method 
+            deleteTodo(id){
+                axios.delete(`http://jsonplaceholder.typicode.com/todos${id}`)
+                .then(res => this.todos = this.todos.filter(res.data.id !== id) )
+                .catch(err => console.log(err));
+            },
+
+        
             addTodo(newTodo){
                 const {title, completed} = newTodo;
                 axios.post('http://jsonplaceholder.typicode.com/todos', {
@@ -54,16 +55,10 @@
                 })
                 .then(res => this.todos=[...this.todos, res.data])
                 .catch(err => console.log(err));
-            },
-            
-            deleteTodo(id){
-                axios.delete(`http://jsonplaceholder.typicode.com/todos${id}`)
-                .then(res => this.todos = this.todos.filter(res.data.id !== id) )
-                .catch(err => console.log(err));
             }
-
         }
-    };
+            
+    }
 </script>
 
 <style>
