@@ -3,18 +3,45 @@
         <p>
             <input type="checkbox" v-on:change="markComplete">
             {{todo.title}}
-            <button @click ="$emit('del-todo', todo.id)" class ="del">x</button>
+            <button @click ="delTodo" class ="del">x</button>
         </p>
     </div>
 </template>
 
 <script>
+    
+
     export default {
         name: "TodoItem",
-        props:["todo"],
+
+        props:{
+            todo:{
+                id: {
+                    type: Number
+                },
+                name:{
+                    type: String
+                },
+                completed:{
+                    type: Boolean
+                }
+            }
+        },
+    
         methods:{
             markComplete(){
                 this.todo.completed = !this.todo.completed;
+            },
+            //This is broken
+            //this.name returns undefined
+            delTodo(id){
+                try{
+                    var em = "del-todo";
+                    console.log(this.name);
+                    this.$emit(em, id);
+                }catch(err){
+                    console.log(this.name + " "+ err);
+                }
             }
         }
     }

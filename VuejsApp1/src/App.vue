@@ -2,7 +2,7 @@
     <div id="app">
         <Header></Header>
         <AddTodo v-on:add-todo="addTodo" />
-        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo" />
+        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo(this.todo)" />
 
     </div>
 </template>
@@ -26,7 +26,23 @@
 
         data() {
             return {
-                todos: []
+                todos: [
+                    {
+                        id: 1,
+                        name: "title1",
+                        completed: false
+                    },
+                    {
+                        id: 2,
+                        name: "title2",
+                        completed: false
+                    },
+                    {
+                        id: 3,
+                        name: "title3",
+                        completed: false
+                    }
+                ]
             }
         },
     //Created is supposedly to run as soon as app is mounted, but doesn't.
@@ -40,7 +56,11 @@
            //Delete todo does not work. 
            //I am not sure if the del-todo is being emitted as it is supposed to, 
            //or if there is an issue with the deleteTodo method 
+
+           //Getting Error 404 on Delete
+           //this.name returns undefined
             deleteTodo(id){
+                console.log(this.name);
                 axios.delete(`http://jsonplaceholder.typicode.com/todos${id}`)
                 .then(res => this.todos = this.todos.filter(res.data.id !== id) )
                 .catch(err => console.log(err));
