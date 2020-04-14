@@ -2,8 +2,7 @@
     <div id="app">
         <Header></Header>
         <AddTodo v-on:add-todo="addTodo" />
-        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo(this.todo)" />
-
+        <Todos v-bind:todos="todos" v-on:del-todo="deleteTodo(todo.id)" />
     </div>
 </template>
 
@@ -29,23 +28,37 @@
                 todos: [
                     {
                         id: 1,
-                        name: "title1",
+                        title: "title1",
                         completed: false
                     },
                     {
                         id: 2,
-                        name: "title2",
+                        title: "title2",
                         completed: false
                     },
                     {
                         id: 3,
-                        name: "title3",
+                        title: "title3",
                         completed: false
-                    }
+                    },
+                    
                 ]
             }
         },
-    //Created is supposedly to run as soon as app is mounted, but doesn't.
+        // props:{
+        //     todo:{
+        //         id: {
+        //             type: Number
+        //         },
+        //         title:{
+        //             type: String
+        //         },
+        //         completed:{
+        //             type: Boolean
+        //         }
+        //     }
+        // },
+    
         methods: {
             created(){
               axios.get('http://jsonplaceholder.typicode.com/todos?_limit=10')
@@ -60,8 +73,8 @@
            //Getting Error 404 on Delete
            //this.name returns undefined
             deleteTodo(id){
-                console.log(this.name);
-                axios.delete(`http://jsonplaceholder.typicode.com/todos${id}`)
+                console.log(this.title);
+                axios.delete('http://jsonplaceholder.typicode.com/todos${id}')
                 .then(res => this.todos = this.todos.filter(res.data.id !== id) )
                 .catch(err => console.log(err));
             },
@@ -75,6 +88,9 @@
                 })
                 .then(res => this.todos=[...this.todos, res.data])
                 .catch(err => console.log(err));
+
+                 console.log(this.id + " " + this.title +" "+ this.completed);
+                 console.log(newTodo.title+ " " + newTodo.completed);
             }
         }
             

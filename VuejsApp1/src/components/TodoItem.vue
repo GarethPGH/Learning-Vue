@@ -9,24 +9,22 @@
 </template>
 
 <script>
-    
-
     export default {
         name: "TodoItem",
 
-        props:{
-            todo:{
-                id: {
-                    type: Number
-                },
-                name:{
-                    type: String
-                },
-                completed:{
-                    type: Boolean
-                }
-            }
-        },
+        // props:{
+        //     todo:{
+        //         id:{
+        //             type: Number
+        //         },
+        //         title:{
+        //             type: String
+        //         },
+        //         completed:{
+        //             type: Boolean
+        //         }
+        //     }
+        // },
     
         methods:{
             markComplete(){
@@ -34,13 +32,14 @@
             },
             //This is broken
             //this.name returns undefined
+            //vm.todo is undefined. Means the todo themselves are not defined
             delTodo(id){
                 try{
                     var em = "del-todo";
-                    console.log(this.name);
+                    console.log(this.title);
                     this.$emit(em, id);
                 }catch(err){
-                    console.log(this.name + " "+ err);
+                    console.log(this.title + " "+ err);
                 }
             }
         }
