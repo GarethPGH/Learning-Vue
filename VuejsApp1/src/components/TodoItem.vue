@@ -11,21 +11,15 @@
 <script>
     export default {
         name: "TodoItem",
+        
+        props:{
+            todo:{
+                id:Number,
+                title:String,
+                completed:Boolean
+            }
+        },
 
-        // props:{
-        //     todo:{
-        //         id:{
-        //             type: Number
-        //         },
-        //         title:{
-        //             type: String
-        //         },
-        //         completed:{
-        //             type: Boolean
-        //         }
-        //     }
-        // },
-    
         methods:{
             markComplete(){
                 this.todo.completed = !this.todo.completed;
@@ -33,6 +27,8 @@
             //This is broken
             //this.name returns undefined
             //vm.todo is undefined. Means the todo themselves are not defined
+            //Information from the added Todos is not being bound to the del-Todo,
+            //Although it is being emitted properly from TodoItem to Todos to App.vue
             delTodo(id){
                 try{
                     var em = "del-todo";

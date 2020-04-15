@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-bind:key="todo.id" v-for="todo in todos">
+        <div v-bind:key="todo.id" v-for="todo in todos" >
             <!--Todos are supposed to be pulled from app.vue. I think there is a problem with how the attribute is written.-->
             <TodoItem v-bind:todo="todo" v-on:del-todo="delTodo"/>
         </div>
@@ -18,7 +18,7 @@
             TodoItem: TodoItem
         },
 //Todos is undefined
-        props:['todos'],
+        props:['todos','todo'],
         //And with the '' I get refrenced on render but not defined. WTH?
 //Why is del-todo still null/undefined when I have explicitly used props to send individual todo
         // props:{

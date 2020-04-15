@@ -25,24 +25,12 @@
 
         data() {
             return {
-                todos: [
-                    {
-                        id: 1,
-                        title: "title1",
-                        completed: false
-                    },
-                    {
-                        id: 2,
-                        title: "title2",
-                        completed: false
-                    },
-                    {
-                        id: 3,
-                        title: "title3",
-                        completed: false
-                    },
-                    
-                ]
+                todos: [],
+                todo:{
+                    id: 1,
+                    title: "Title1",
+                    completed: false
+                }
             }
         },
         // props:{
@@ -71,7 +59,9 @@
            //or if there is an issue with the deleteTodo method 
 
            //Getting Error 404 on Delete
-           //this.name returns undefined
+           //this.title returns undefined
+
+           //Id retrieved in the DELETE headers is todos${id}, always returns 404
             deleteTodo(id){
                 console.log(this.title);
                 axios.delete('http://jsonplaceholder.typicode.com/todos${id}')
@@ -79,18 +69,18 @@
                 .catch(err => console.log(err));
             },
 
-        
+        //JSONplaceholder is returning the object with the same id every time
+        //even passing in the id parameter returns undefined. Still getting same id from JSONPlacholder
             addTodo(newTodo){
-                const {title, completed} = newTodo;
+                const {title, completed, id} = newTodo;
                 axios.post('http://jsonplaceholder.typicode.com/todos', {
                     title: title,
-                    completed: completed
+                    completed: completed,
+                    id: id
                 })
                 .then(res => this.todos=[...this.todos, res.data])
                 .catch(err => console.log(err));
-
-                 console.log(this.id + " " + this.title +" "+ this.completed);
-                 console.log(newTodo.title+ " " + newTodo.completed);
+                console.log(newTodo.id);
             }
         }
             
