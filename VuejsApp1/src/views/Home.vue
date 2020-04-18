@@ -24,23 +24,24 @@ export default {
     },
 
     methods:{
-      //Broken. Does not send id to Delete action, always returns 404, id is listed as undefined
+      //Works as expected
         deleteTodo(id){
-            axios.delete(`https://jsonplaceholder.typicode.com/todos${id}`)
+            axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
             .then(response => {this.todos = this.todos.filter(todo=>todo.id !== id, response.data)})
             .catch(err => console.log(err));
         },
       //Works as expected. Id returned is always 201, by design.
         addTodo(newTodo){
             const{ title, completed } = newTodo;
-            axios.post('https://jsonplaceholder.typicode.com/todos',{title,completed})
+            axios.post('https://jsonplaceholder.typicode.com/todos/',{title,completed})
             .then(response =>{ this.todos=[...this.todos, response.data]})
             .catch(err => console.log(err));
         },
-        //Does not run at all.
+        //Does not run at all, though the json is restricted to the first 10 in JSONPlaceholder
+        //Do I have to map them to TodoItem?
         created(){
-            axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-            .then(response => {this.todos = response.data})
+            axios.get('https://jsonplaceholder.typicode.com/todos/?_limit=10')
+            .then(response => {this.todos = [...response.data]})
             .catch(err => console.log(err));
         }
     }
