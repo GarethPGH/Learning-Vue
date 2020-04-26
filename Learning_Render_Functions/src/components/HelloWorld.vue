@@ -46,7 +46,7 @@ export default{
   name: 'HelloWorld',
 
   data: function(){
-    //links for the ul/li elements. 2-5-5
+//links for the ul/li elements. 2-5-5
     return{ 
     hreferences : ["https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel","https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint",
       "https://vuejs.org","https://forum.vuejs.org","https://chat.vuejs.org", "https://twitter.com/vuejs","https://news.vuejs.org",
@@ -59,9 +59,17 @@ export default{
   },
 
   render(createElement){
+     //<div class="hello">
     return createElement('div',{ class:"hello"},
    [ 
+     //<h1>{{ msg }}</h1> Should pull msg from App.vue
     createElement('h1'+ this.msg),
+
+    /*<p>
+      For a guide and recipes on how to configure / customize this project,<br>
+      check out the
+      <a href= target="_blank" rel="noopener">vue-cli documentation</a>.
+    </p> */
     createElement('p' + "For a guide and recipes on how to configure / customize this project,check out the",
       
       //double nesting create element, is this a problem?
@@ -75,7 +83,14 @@ export default{
         }
       )]    
     ),
+    // <h3>Installed CLI Plugins</h3> I dont know if this will do what I think it will
     createElement('h3', "Installed CLI Plugins"),
+
+    /*<ul>
+      <li><a href= target="_blank" rel="noopener">babel</a></li>
+      <li><a href= target="_blank" rel="noopener">eslint</a></li>
+    </ul> */
+    //WORKING HERE. Href should pull from first 2 indicies of hreferences
     createElement('ul', [
         for(let i=0;i<2,i++){  
           createElement('li',[
