@@ -9,7 +9,7 @@
 -->
 
 <script>
-//import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './components/HelloWorld.vue'
 
 
 //LOOKUP THIS PAGE https://vuejs.org/v2/guide/render-function.html FULL SYNTAX EXAMPLE TOWARDS BOTTOM
@@ -43,7 +43,7 @@ export default{
     )},
 
   components:{
-    //HelloWorld
+    HelloWorld
   }
 }
 </script>
