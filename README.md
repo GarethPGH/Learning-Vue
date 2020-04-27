@@ -23,14 +23,12 @@
 4:) Attempted to scale back to simple "hello world" type app to examine how Vue handles dataflow, using simple data options between two files, console.log(proof that the changes were being made). It did not work, possibly due to VS2019 issues listed above 
 <br />
 5:) Switched to Travery Media's Vue JS Todo App, using VSCode and NPM: https://www.youtube.com/watch?v=Wy9q22isx3U&t=3528s <br />
-App does not work once you add JSONPlaceholder to your dependancies to simulate an HTTP back end. I am getting an error that my Todos property (referring to my Todo Import statement in Vue.app) is not reactive. However, it was, at the time, written exactly as the tutorial had it written. I have made some changes to point directly at my import statements, but I don't know what is causing the problem. AddTodo does not add Todos to the list, and Created() method in App.vue does not pull data from JSONPlaceholder (VuejsApp1 folder)
+App does not work once you add JSONPlaceholder to your dependancies to simulate an HTTP back end. Included how to use vue-router. The project worked as expected after including vue-router.
 <br />
-Am currently trying to find out the answer to my questions, and am heavily focusing on the documentation at Vuejs.org
+6:) Added tutorial projects for both vue-router and vuex, from Traversy Media. Rewriting Hello World example app in render functions to learn how to use them.
 <br />
 ### Goals:
 <br />
-1:) Do the tutorial, so I can better understand how to archiect Vue apps
+1:) Create a Vuejs photo gallery  
 <br />
-2:) Create a Vuejs photo gallery  
-<br />
-3:) Present what I learned to the .NET Usergroup, about how to use Vue.js  
+2:) Present what I learned to the .NET Usergroup, about how to use Vue.js  
