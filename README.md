@@ -13,6 +13,8 @@
 <br />
  4:)Vue-Cli has a UI; vue ui command in the terminal. Use it. I fixed a configuration issue I spent 7 hours over the course of two days trying to figure out, in 5 minutes by navigating a couple menus.
 <br />
+5:) Not sure if render functions are worth the hype. They might cut down on client Javascript download size, but the gain in performance causes a huge difference in complexity. Templates seem far easier to manage, and much easier to read. Maybe for complex or repetitive template code? For now though, will be sticking with templates
+<br />
 ### What I built:  
 1:) Managed to create a hard-coded Vue slideshow in VS 2019. I could not successfully use it as a component. There were pathing issues. 
 <br />
@@ -25,8 +27,9 @@
 5:) Switched to Travery Media's Vue JS Todo App, using VSCode and NPM: https://www.youtube.com/watch?v=Wy9q22isx3U&t=3528s <br />
 App does not work once you add JSONPlaceholder to your dependancies to simulate an HTTP back end. Included how to use vue-router. The project worked as expected after including vue-router.
 <br />
-6:) Added tutorial projects for both vue-router and vuex, from Traversy Media. Rewriting Hello World example app in render functions to learn how to use them.
+6:) Did tutorial projects for both vue-router and vuex, from Traversy Media.
 <br />
+7:) Rewrote HelloWorld using render functions instead of templates. While not exactly as the original example, it functions. However, will probably use templates unless otherwise required, for future projects (Learning Render Functions folder)
 ### Goals:
 <br />
 1:) Create a Vuejs photo gallery  
