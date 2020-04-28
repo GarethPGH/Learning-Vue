@@ -9,8 +9,7 @@
 -->
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HelloWorld from './components/HelloWorld.vue';
 
 //LOOKUP THIS PAGE https://vuejs.org/v2/guide/render-function.html FULL SYNTAX EXAMPLE TOWARDS BOTTOM
 export default{
@@ -20,6 +19,8 @@ export default{
       return {
         msg: "Welcome to Your Vue.js App"
       }
+      //Getting String contains invalid character error, not sure why
+      //Also this error apparently broke the whole app
     },
 
     components:{ "HelloWorld": HelloWorld},
@@ -44,9 +45,7 @@ export default{
             }
         }),
       
-        createElement(
-          'HelloWorld'
-        )
+        createElement('HelloWorld')
       ]
     )},
 

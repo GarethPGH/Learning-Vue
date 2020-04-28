@@ -2,10 +2,8 @@
 <script>
 export default{
   name: 'HelloWorld',
-
-  props: {
-    "msg": msg
-  },
+  //this should be availible for the whole component 
+  props: ['msg'],
   
   render(createElement){
     //hrefs for the ul lists 2-5-5
@@ -15,7 +13,7 @@ export default{
     //<div class="hello">
     return createElement('div',{ 
       class:"hello",
-
+      
       methods:{
         created: function(){
           console.log("HelloWorld loaded");}
@@ -24,17 +22,17 @@ export default{
     [ 
      //<h1>{{ msg }}</h1> Should pull msg from App.vue
      //getting contains invalid string error.
-      createElement('h1', {domProps:{innerHTML: this.msg}}),
+      createElement('h1', this.msg),
 
     /*<p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
       <a href= target="_blank" rel="noopener">vue-cli documentation</a>.
     </p> */
-      createElement('p' + "For a guide and recipes on how to configure / customize this project,check out the",
+      createElement('p', "For a guide and recipes on how to configure / customize this project,check out the",
       
       //double nesting create element, is this a problem?
-        [createElement('a'+ "vue-cli documentation",
+        [createElement('a', "vue-cli documentation",
           {
             attrs:{
               href:"https://cli.vuejs.org",
