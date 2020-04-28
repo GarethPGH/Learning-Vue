@@ -1,8 +1,8 @@
-
 <script>
 export default{
   name: 'HelloWorld',
-  //this should be availible for the whole component 
+  //this should be availible for the whole component
+  //it does not seem to be pulling anything from the parent component App.vue however 
   props: ['msg'],
   
   render(createElement){
@@ -15,14 +15,15 @@ export default{
       class:"hello",
       
       methods:{
+        //this does not seem to run
         created: function(){
           console.log("HelloWorld loaded");}
       },
     },  
     [ 
      //<h1>{{ msg }}</h1> Should pull msg from App.vue
-     //getting contains invalid string error.
-      createElement('h1', this.msg),
+     //This does not work
+      createElement('h1', {domProps:{innerHTML:this.msg}}),
 
     /*<p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -49,7 +50,6 @@ export default{
       <li><a href= target="_blank" rel="noopener">babel</a></li>
       <li><a href= target="_blank" rel="noopener">eslint</a></li>
     </ul> */
-    //Hrefset1, hrefset2, and hrefset3 are undefined. Cant figure out how they are related to this.
       createElement('ul', hrefset1.map(function(hrefset){
         return createElement('li', 
         [

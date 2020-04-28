@@ -1,13 +1,3 @@
-<!--turn me into a render function
-
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
--->
-
 <script>
 import HelloWorld from './components/HelloWorld.vue';
 
@@ -19,11 +9,9 @@ export default{
       return {
         msg: "Welcome to Your Vue.js App"
       }
-      //Getting String contains invalid character error, not sure why
-      //Also this error apparently broke the whole app
     },
 
-    components:{ "HelloWorld": HelloWorld},
+    components:{HelloWorld},
 
   render: function(createElement) {
     return createElement(
@@ -44,7 +32,7 @@ export default{
               alt: "Vue logo",
             }
         }),
-      
+      //This will be the component
         createElement('HelloWorld')
       ]
     )},
