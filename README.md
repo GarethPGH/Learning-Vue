@@ -15,9 +15,10 @@
  
 <br />
 5:) Not sure if render functions are worth the hype. They might cut down on client Javascript download size, but the gain in performance causes a huge difference in complexity. Templates seem far easier to manage, and much easier to read. Maybe for complex or repetitive template code? For now though, will be sticking with templates  
+<br />  
 
-<br />
-### What I built:  
+### What I built:   
+
 1:) Managed to create a hard-coded Vue slideshow in VS 2019. I could not successfully use it as a component. There were pathing issues. 
 <br />
 2:) Vue instances must have one overall parent node. (usually a div). Components can't work as top level elements.  
