@@ -29,7 +29,8 @@ App does not work once you add JSONPlaceholder to your dependancies to simulate 
 <br />
 6:) Did tutorial projects for both vue-router and vuex, from Traversy Media.
 <br />
-7:) Rewrote HelloWorld using render functions instead of templates. While not exactly as the original example, it functions. However, will probably use templates unless otherwise required, for future projects (Learning Render Functions folder)
+7:) Rewrote HelloWorld using render functions instead of templates. While not exactly as the original example, it functions. 
+</br >
 ### Goals:
 <br />
 1:) Create a Vuejs photo gallery  
