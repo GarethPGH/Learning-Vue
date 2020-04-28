@@ -14,7 +14,15 @@ import HelloWorld from './components/HelloWorld.vue'
 
 //LOOKUP THIS PAGE https://vuejs.org/v2/guide/render-function.html FULL SYNTAX EXAMPLE TOWARDS BOTTOM
 export default{
-  name:"App",
+    name:"App",
+
+    data(){
+      return {
+        msg: "Welcome to Your Vue.js App"
+      }
+    },
+
+    components:{ "HelloWorld": HelloWorld},
 
   render: function(createElement) {
     return createElement(
@@ -42,9 +50,7 @@ export default{
       ]
     )},
 
-  components:{
-    HelloWorld
-  }
+
 }
 </script>
 

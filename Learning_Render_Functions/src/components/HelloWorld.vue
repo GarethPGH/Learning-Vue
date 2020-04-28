@@ -3,25 +3,28 @@
 export default{
   name: 'HelloWorld',
 
-  data: function(){
-//links for the ul/li elements. 2-5-5
-    return{ 
-    hrefset1: [{tool: "babel", url: "https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"}, {tool:"eslint", url: "https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"}],
-    hrefset2: [{tool: "Core Docs", url: "https://vuejs.org"},{tool: "Forum", url: "https://forum.vuejs.org"},{tool: "Community Chat" , url: "https://chat.vuejs.org"},{tool:"Twitter", url: "https://twitter.com/vuejs"},{tool: "News",url: "https://news.vuejs.org"}],
-    hrefset3: [{tool: "vue-router", url: "https://router.vuejs.org"},{tool: "vuex", url: "https://vuex.vuejs.org"},{tool: "vue-devtools", url: "https://github.com/vuejs/vue-devtools#vue-devtools"},{tool: "vue-loader", url: "https://vue-loader.vuejs.org"},{tool: "awesome vue", url: "https://github.com/vuejs/awesome-vue"}]
-    }
-  },
-//Get the msg from the parent
   props: {
-    msg: String
+    "msg": msg
   },
-
+  
   render(createElement){
-     //<div class="hello">
-    return createElement('div',{ class:"hello"},
+    //hrefs for the ul lists 2-5-5
+    var hrefset1 = [{tool: "babel", url: "https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"}, {tool:"eslint", url: "https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"}];
+    var hrefset2 = [{tool: "Core Docs", url: "https://vuejs.org"},{tool: "Forum", url: "https://forum.vuejs.org"},{tool: "Community Chat" , url: "https://chat.vuejs.org"},{tool:"Twitter", url: "https://twitter.com/vuejs"},{tool: "News",url: "https://news.vuejs.org"}];
+    var hrefset3 = [{tool: "vue-router", url: "https://router.vuejs.org"},{tool: "vuex", url: "https://vuex.vuejs.org"},{tool: "vue-devtools", url: "https://github.com/vuejs/vue-devtools#vue-devtools"},{tool: "vue-loader", url: "https://vue-loader.vuejs.org"},{tool: "awesome vue", url: "https://github.com/vuejs/awesome-vue"}];
+    //<div class="hello">
+    return createElement('div',{ 
+      class:"hello",
+
+      methods:{
+        created: function(){
+          console.log("HelloWorld loaded");}
+      },
+    },  
     [ 
      //<h1>{{ msg }}</h1> Should pull msg from App.vue
-      createElement('h1'+ this.msg),
+     //getting contains invalid string error.
+      createElement('h1', {domProps:{innerHTML: this.msg}}),
 
     /*<p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -48,12 +51,12 @@ export default{
       <li><a href= target="_blank" rel="noopener">babel</a></li>
       <li><a href= target="_blank" rel="noopener">eslint</a></li>
     </ul> */
-    //Href should pull from first 2 indicies of hreferences
-      createElement('ul', this.hrefset1.map(function(hrefset1){
+    //Hrefset1, hrefset2, and hrefset3 are undefined. Cant figure out how they are related to this.
+      createElement('ul', hrefset1.map(function(hrefset){
         return createElement('li', 
         [
-          createElement( 'a',{attrs:{href: hrefset1.url, target:'_blank', rel:'noopener'}, 
-          domProps:{innerHTML: hrefset1.tool}})
+          createElement( 'a',{attrs:{href: hrefset.url, target:'_blank', rel:'noopener'}, 
+          domProps:{innerHTML: hrefset.tool}})
         ])
       })),
 
@@ -68,11 +71,11 @@ export default{
       <li><a href= target="_blank" rel="noopener">Twitter</a></li>
       <li><a href= target="_blank" rel="noopener">News</a></li>
     </ul> */
-      createElement('ul', this.hrefset2.map(function(hrefset1){
+      createElement('ul', hrefset2.map(function(hrefset){
         return createElement('li', 
         [
-          createElement( 'a',{attrs:{href: hrefset2.url, target:'_blank', rel:'noopener'}, 
-          domProps:{innerHTML: hrefset2.tool}})
+          createElement( 'a',{attrs:{href: hrefset.url, target:'_blank', rel:'noopener'}, 
+          domProps:{innerHTML: hrefset.tool}})
         ])
       })),
 
@@ -87,16 +90,16 @@ export default{
       <li><a href= target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href= target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>*/
-      createElement('ul', this.hrefset3.map(function(hrefset1){
+      createElement('ul', hrefset3.map(function(hrefset){
         return createElement('li', 
         [
-          createElement( 'a',{attrs:{href: hrefset3.url, target:'_blank', rel:'noopener'}, 
-          domProps:{innerHTML: hrefset3.tool}})
+          createElement( 'a',{attrs:{href: hrefset.url, target:'_blank', rel:'noopener'}, 
+          domProps:{innerHTML: hrefset.tool}})
         ])
       })),
 
     ])
-  }//end of render function
+  },//end of render function,
 }
 </script>
 
