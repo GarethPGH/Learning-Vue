@@ -22,7 +22,7 @@
             },
 
             images: state => state.images
-        }
+        
     },
     //analogous to vue Methods: Business logic
     //commit or store.dispatch the mutation to touch the data asynchonously
@@ -36,18 +36,21 @@
     //Commit and Track changes to the State. this must be done synchronously
     //This is where the actual magic happens: Data management
     mutations: {
-        SET_IMAGE:(state, image){
+        SET_IMAGE:(state)=>{
             state.image.title = title;
             state.image.url = url;//replace this with an API call to set an id when added to the gallery
             state.image.description = description;
             console.log(this.$store.state.Image);
         },
+    }
+      
+        /*Figure out wher eto put these:
 
-        pushImage(Images){
+          pushImage(Images){
             this.Images.unshift(this.image);
 
             this.$store.commit('pushImage');
-        }, 
+        }
 
         _getImageById: (state) => (id) => {
             return state.images.find(image => image.id === id);
@@ -60,5 +63,6 @@
         deleteImageById: (state) => (id) => {
             return state.images.filter(image => image.id !== id)
         },
-    }
+        */
+    
 }
