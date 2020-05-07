@@ -7,18 +7,17 @@
 
 <script>
 import vuex from 'vuex';
-import AddImage from 'AddImage.vue';
-import Images from 'Images.vue';
-import ImageGallery from 'ImageGallery.vue';
+import AddPicture from './components/AddPicture.vue';
+import Pictures from './components/Pictures.vue';
+
 
 export default {
   name: 'App',
   store: store,
   //This needs and add images, images (may be moved to store for vuex), home image gallery
   components: {
-    AddImage,
-    Images,
-    ImageGallery
+    AddPicture,
+    Pictures,
   },
   //return state to the store in a computed property
   computed:{
