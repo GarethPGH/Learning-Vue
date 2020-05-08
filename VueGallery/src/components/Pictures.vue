@@ -1,33 +1,30 @@
 <template>
     <div> 
         <span v-for="Picture in Pictures" v-bind:key="Picture.id">
+            <p>{{title}}</p>
             <img :class="normal" v-bind:src="Picture" @onclick="showFullSize"/>
         </span>
     </div>
 </template>
 <script>
-import vuex from "vuex";
+import {mapState} from 'vuex';
+import Pictures from '../store/index.js';
 
 export default {
+  
     name: Pictures,
     //this might end up being a part of the vuex store instead, 
     //but should be the main images component that stores the images 
     //and how they should be displayed on page,
-    components:{
-        gallery
-    },
     data(){
         return{
-            class: "normal",
-            pictures: this.$store.mapGetters(getPictures)
+            class: "normal"
         }
     },
     //I dont know if this is redundant
-    computed:{
-        pictures(){
-            return this.$store.state.Pictures;
-        }
-    },
+    computed: mapState({
+        Pictures: state => state.Pictures.all
+    }),
 
     methods:{
         showFullSize:()=>{

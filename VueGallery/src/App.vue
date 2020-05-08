@@ -1,28 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AddPicture></AddPicture>
+    <Pictures></Pictures>
   </div>
 </template>
 
 <script>
-import vuex from 'vuex';
 import AddPicture from './components/AddPicture.vue';
 import Pictures from './components/Pictures.vue';
 
-
 export default {
   name: 'App',
-  store: store,
   //This needs and add images, images (may be moved to store for vuex), home image gallery
   components: {
     AddPicture,
-    Pictures,
-  },
-  //return state to the store in a computed property
-  computed:{
-
+    Pictures
   }
+
 }
 </script>
 
