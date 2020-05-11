@@ -11,7 +11,8 @@ import {mapActions} from 'vuex';
 import {Pic, setPicture} from '../store/index.js'
 
 export default {
-    name: AddPicture,
+    //name: AddPicture,
+
     //This is the name of the component, why the hell is it being treated like an unused variable?
     //This will be the add an image form component
     //url and id should be set by the API call

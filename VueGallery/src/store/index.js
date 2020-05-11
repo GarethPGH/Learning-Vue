@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
+    strict: process.env.NODE_ENV !== 'production',
     //analogous to vue Data
     //Ideally create all your data properties here as a best practice
     //though you can use Vue.set(object, property, propertyvalue ) 

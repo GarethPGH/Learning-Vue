@@ -8,11 +8,11 @@
 </template>
 <script>
 import {mapState} from 'vuex';
-import Pictures from '../store/index.js';
+//import Pictures from '../store/index.js';
 
 export default {
   
-    name: Pictures,
+    //name: Pictures,
     //this might end up being a part of the vuex store instead, 
     //but should be the main images component that stores the images 
     //and how they should be displayed on page,
