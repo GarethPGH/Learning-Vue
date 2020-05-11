@@ -10,7 +10,20 @@ export default new Vuex.Store({
     //though you can use Vue.set(object, property, propertyvalue ) 
     //or the spread operator dataob={...dataob, property, propertyvalue}in your associated vue file to add to the store
     state: ()=>({
-        Pictures:[{id: 0, title:"this is a title",url:"http://websitename/picturename.jpg",description:"Generic picture of a barn"}],
+        Pictures:[
+            {id: 0, title:"Fox Mural",
+            url:"../assets/foxmural.jpg",
+            description:"Mural of fox family with Spring flowers"},
+            {id: 1, title:"Fox Painting",
+            url:"../assets/foxpainting.jpg",
+            description:"Painting of a fox on wood slab backed by wisteria flowers"},
+            {id: 2, title:"Mead Label",
+            url:"../assets/meadlabel.jpg",
+            description: "Label for mead wine"},
+            {id: 3, title:"Pittsburgh Mural",
+            url:"../assets/pittsburghmural.jpg",
+            description:"Mural of the city of Pittsburgh with older style stadiums"}
+        ],
         
         Pic:{
             id: 0,
@@ -21,11 +34,11 @@ export default new Vuex.Store({
     }),
   //analogous to vue Computed
     getters: {
-        getPic:{
-            id: state => state.Pic.id,
-            title: state => state.Pic.title,
-            url: state => state.Pic.url,
-            description: state => state.Pic.description
+        getPic:()=>{
+            state => {state.Pic.id,
+                    state.Pic.title,
+                    state.Pic.url,
+                    state.Pic.description}
         },
 
         getPictures: state => state.Pictures

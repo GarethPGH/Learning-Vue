@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 //import Pictures from '../store/index.js';
 
 export default {
@@ -22,9 +22,9 @@ export default {
         }
     },
     //I dont know if this is redundant
-    computed: mapState({
-        Pictures: state => state.Pictures.all
-    }),
+    computed: {
+        ...mapGetters(['getPictures'])
+        },
 
     methods:{
         showFullSize:()=>{
