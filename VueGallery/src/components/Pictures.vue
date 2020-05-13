@@ -1,13 +1,14 @@
 <template>
     <div> 
         <span v-for="Picture in Pictures" v-bind:key="Picture.id">
-            <p>{{title}}</p>
-            <img :class="normal" v-bind:src="Picture" @onclick="showFullSize"/>
+            <p>{{Picture.title}}</p>
+            <img :class="normal" v-bind:src="Picture.url" @onclick="showFullSize"/>
+            <p>{{Picture.description}}</p>
         </span>
     </div>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import {mapState} from 'vuex';
 //import Pictures from '../store/index.js';
 
 export default {
@@ -21,12 +22,12 @@ export default {
             class: "normal"
         }
     },
-    //I dont know if this is redundant
-    computed: {
-        ...mapGetters(['getPictures'])
-        },
+    computed: mapState({
+            Pictures:state => state.Pictures
+    }),
 
     methods:{
+  
         showFullSize:()=>{
             if(this.class === "normal"){
                 this.class ="clicked";
