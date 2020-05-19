@@ -12,22 +12,28 @@ export default new Vuex.Store({
     state: ()=>({
         Pictures:[
             {id: 0, title:"Fox Mural",
-            url:"../../assets/foxmural.jpg",
+            thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
+            url:"../../assets/pictures/foxmural.jpg",
             description:"Mural of fox family with Spring flowers"},
             {id: 1, title:"Fox Painting",
-            url:"../../assets/foxpainting.jpg",
+            thumbUrl:"../../assets/thumbs/foxpaintingthumb.jpg",
+            url:"../../assets/pictures/foxpainting.jpg",
             description:"Painting of a fox on wood slab backed by wisteria flowers"},
             {id: 2, title:"Mead Label",
-            url:"../../assets/meadlabel.jpg",
+            thumbUrl:"../../assets/thumbs/meadlabelthumb.jpg",
+            url: "../../assets/pictures/meadlabel.jpg",
             description: "Label for mead wine"},
             {id: 3, title:"Pittsburgh Mural",
-            url:"../../assets/pittsburghmural.JPG",
+            thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
+            url:"../../assets/pictures/pittsburghmural.JPG",
             description:"Mural of the city of Pittsburgh with older style stadiums"}
         ],
+        
         
         Pic:{
             id: 0,
             title: "",
+            thumbUrl:"",
             url: "",
             description:""
         } 

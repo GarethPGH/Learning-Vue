@@ -6,7 +6,7 @@
             </tr>
             <tr>
                 <td>
-                    <img v-bind:src="Picture.url" v-bind:alt="Picture.description" @onclick="showFullSize()" v-bind:style="normal"/>
+                    <img v-bind:src="Picture.thumbUrl" v-bind:alt="Picture.description" @onclick="placeholdertext" v-bind:style="normal"/>
                 </td>
             </tr>
         </table>
@@ -22,6 +22,7 @@ export default {
     //this might end up being a part of the vuex store instead, 
     //but should be the main images component that stores the images 
     //and how they should be displayed on page,
+
     data:()=>{
         //invalid number error for height and width
         return {
@@ -48,15 +49,7 @@ export default {
     }),
 
     methods:{
-  
-        showFullSize:()=>{
-        
-            if(this.style === "normal"){
-                this.style ="clicked";
-            }else{
-                this.style = "normal";
-            }
-        }
+
     }
 }
 </script>
