@@ -27,6 +27,9 @@ export default {
         Pictures: state => state.Pictures
     }),
     //I will have to pass a prop to bubble the @click event to this component from Pictures.vue
+    methods:{
+        
+    },
     //Also I must extract the url from the associated picture in Pictures
     //I do not know if I should pull this from the store, or from the Pictures.vue component
     props:[Pic]

@@ -1,5 +1,7 @@
 <template>
     <form>
+        <button type="AddsFiles" @onclick="setPictureLocation"><label>Add Image</label></button>
+        <input type="text" v-model="location" placeholder="Add a new Image" />
         <input type="text" v-model="title" placeholder="Image Name"/>
         <input type="text" v-model="description" placeholder="Describe your Image"/>
         <button type="submit" @onclick ="addNewPicture">Submit</button>
@@ -7,14 +9,17 @@
 </template>
 
 <script>
+//I may turn this into a header type file, though likely won't matter for a SPA
 import {mapActions} from 'vuex';
 
 export default {
     //name: AddPicture,
 
     model:{
+
         title: "Image Title",
-        description: "Image Description"
+        description: "Image Description",
+        location: "location.jpg"
     },
  
     computed:{
@@ -32,7 +37,10 @@ export default {
 
             this.store.dispatch('setPicture', newPicture);
         },
- 
+        setPictureLocation:(e)=>{
+            e.preventDefault;
+            //access the file system and set new picture to location of image you want to add
+        }
     }
 
 }
