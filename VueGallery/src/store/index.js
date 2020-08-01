@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
-
-export default new Vuex.Store({
+//For some dumb reason VUE CLI thinks that store is supposed to be in nodeModules folder
+const store = new Vuex.Store({
     strict: process.env.NODE_ENV !== 'production',
     //analogous to vue Data
     //Ideally create all your data properties here as a best practice
@@ -28,27 +28,19 @@ export default new Vuex.Store({
             url:"../../assets/pictures/pittsburghmural.JPG",
             description:"Mural of the city of Pittsburgh with older style stadiums"}
         ],
-        
-        
-        Pic:{
-            id: 0,
-            title: "",
-            thumbUrl:"",
-            url: "",
-            description:""
-        } 
     }),
+    props:[{
+            picture:{
+                id: Number,
+                title: String,
+                thumbUrl: String,
+                url: String,
+                description: String
+            }
+        }],
   //analogous to vue Computed
     getters: {
-        getPic:()=>{
-            state => {state.Pic.id,
-                    state.Pic.title,
-                    state.Pic.url,
-                    state.Pic.description}
-        },
-
-        getPictures: state => state.Pictures
-      
+        getAllPictures: state => state.Pictures 
     },
   //analogous to vue Methods: Business logic
   //commit or store.dispatch the mutation to touch the data asynchonously
@@ -58,26 +50,34 @@ export default new Vuex.Store({
         setPicture(context){
             context.commit('SET_PICTURE');
         },
-        pushPicture(context){
-            context.commit('PUSH_PICTURE');
+        addPicture(context){
+            context.commit('ADD_PICTURE');
+        },
+        getPicture(context){
+            context.commit('GET_PICTURE');
         }
     },
   //Commit and Track changes to the State. this must be done synchronously
   //This is where the actual magic happens: Data management
     mutations: {
         SET_PICTURE:(state)=>{
-            state.Pic.title = this.title;
-            state.Pic.url = this.url;//replace this with an API call to set an id when added to the gallery
-            state.Pic.description = this.description;
-            console.log(this.$store.state.Pic);
+            state.picture.title = this.title;
+            state.picture.url = this.url;//replace this with an API call to set an id when added to the gallery
+            state.picture.description = this.description;
+            state.picture.thumbUrl = this.thumbUrl;
+            console.log(this.$store.state.picture);
         },
 
-        PUSH_PICTURE(state){
-            state.Pictures.unshift(this.Pic);
+        ADD_PICTURE(state){
+            state.Pictures.unshift(this.picture);
+        }, 
+
+        GET_PICTURE(state){
+            pictures.map.filter(picture.id);
         }
     }
     
-      /*Figure out wher eto put these:
+      /*Figure out where to put these:
 
       _getImageById: (state) => (id) => {
           return state.images.find(image => image.id === id);

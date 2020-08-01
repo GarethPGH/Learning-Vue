@@ -32,7 +32,7 @@ export default {
             let newPicture = new picOb();
             newPicture.title = this.title;
             newPicture.description = this.description;
-            newPicture.url="http://thisisaurl.com/picture.jpg"//Switch this with API call
+            newPicture.url=this.url;//Switch this with API call
             //Actually Id and API call should happen in the Vuex Action right?
 
             this.store.dispatch('setPicture', newPicture);

@@ -4,7 +4,7 @@
         <h4>{{Pic.title}}</h4>
     </div>
     <div>
-        <img src="Pic.url"/>
+        <img src={{Pic.url}}/>
     </div>
     <div>
         <p>{{Pic.description}}</p>
@@ -15,16 +15,17 @@
 <script>
 import {mapState} from 'vuex';
 import {Pic, Pictures} from "../store/index.js";
+import ThePictures from "./ThePictures.vue";
 
 export default {
     name: OpenPicture,
 
     components:{
-        Pictures
+        ThePictures
     },
     
     computed: mapState({
-        Pictures: state => state.Pictures
+        getAllPictures: state => state.Pictures
     }),
     //I will have to pass a prop to bubble the @click event to this component from Pictures.vue
     methods:{

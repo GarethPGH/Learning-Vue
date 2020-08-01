@@ -10,11 +10,11 @@
 </template>
 <script>
 import {mapState} from 'vuex';
-//import Pictures from '../store/index.js';
+import Pictures from '../store/index.js';
 
 export default {
   
-    //name: Pictures,
+    name: ThePictures,
     //this might end up being a part of the vuex store instead, 
     //but should be the main images component that stores the images 
     //and how they should be displayed on page,
@@ -23,7 +23,12 @@ export default {
     components:{
         //OpenPicture
     },
-
+/*!!!!!!!!!!!!! What I need to do
+!!!!!!!!!!!!!!! Change HREF in each picture to openpicture page created by openpicture.vue 
+!!!!!!!!!!!!!!! there should be a large square for the image
+!!!!!!!!!!!!!!! click should use the filter images by id in the store to display the image with the corresponding id
+!!!!!!!!!!!!!!! change image buttons to use smaller images that just forecast the href as a prop to the openpicture page
+*/
     data:()=>{
       
         return {
@@ -41,9 +46,7 @@ export default {
         }
     },
 
-    computed: mapState({
-            Pictures:state => state.Pictures
-    }),
+    computed: {...mapState()},
 
     methods:{
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
@@ -51,12 +54,14 @@ export default {
         //Passing a prop maybe? 
 
         SetThumbnailSize: ()=>{
-            let windowHeight = window.screen.height;
-            let windowWidth = window.screen.width;
-            //Change the thumbnail image to smaller thumbnail image if screen is smaller than 
+            var aPic = store.dispatch("getPicture");
+
+            var windowHeight = window.screen.height;
+            var windowWidth = window.screen.width;
+            
             if(windowWidth <= 640 || windowHeight <= 640){
-                //set to smaller thumbnail size
-                //figure out how to do this using a commit to the vuex store
+                aPic.thumbURL.replace("thumbs", "thumbsmall");
+                store.commit(SET_PICTURE);
             }
         }
     }
