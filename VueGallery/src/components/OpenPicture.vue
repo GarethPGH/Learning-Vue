@@ -1,38 +1,38 @@
 <template>
 <div>
     <div>
-        <h4>{{Pic.title}}</h4>
+        <h4>{{pic.title}}</h4>
     </div>
     <div>
-        <img src={{Pic.url}}/>
+        <img :src = "pic.url"/>
     </div>
     <div>
-        <p>{{Pic.description}}</p>
+        <p>{{pic.description}}</p>
     </div>
 </div>
 </template>
 
 <script>
 import {mapState} from 'vuex';
-import {Pic, Pictures} from "../store/index.js";
-import ThePictures from "./ThePictures.vue";
 
 export default {
-    name: OpenPicture,
+    name: "OpenPicture",
 
-    components:{
-        ThePictures
-    },
-    
     computed: mapState({
         getAllPictures: state => state.Pictures
     }),
+    data(){
+        let pic = this.$state.getPicture();
+        return pic;
+    },
     //I will have to pass a prop to bubble the @click event to this component from Pictures.vue
     methods:{
-        
+        emitting:()=>{
+            this.$emit("emit");
+        }
     },
     //Also I must extract the url from the associated picture in Pictures
     //I do not know if I should pull this from the store, or from the Pictures.vue component
-    props:[Pic]
+
 }
 </script>

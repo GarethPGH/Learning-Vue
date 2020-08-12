@@ -1,46 +1,25 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {v4 as uuidv4 } from 'uuid';
 
 Vue.use(Vuex);
-//For some dumb reason VUE CLI thinks that store is supposed to be in nodeModules folder
-const store = new Vuex.Store({
+
+export default{
     strict: process.env.NODE_ENV !== 'production',
     //analogous to vue Data
     //Ideally create all your data properties here as a best practice
     //though you can use Vue.set(object, property, propertyvalue ) 
     //or the spread operator dataob={...dataob, property, propertyvalue}in your associated vue file to add to the store
-    state: ()=>({
-        Pictures:[
-            {id: 0, title:"Fox Mural",
-            thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
-            url:"../../assets/pictures/foxmural.jpg",
-            description:"Mural of fox family with Spring flowers"},
-            {id: 1, title:"Fox Painting",
-            thumbUrl:"../../assets/thumbs/foxpaintingthumb.jpg",
-            url:"../../assets/pictures/foxpainting.jpg",
-            description:"Painting of a fox on wood slab backed by wisteria flowers"},
-            {id: 2, title:"Mead Label",
-            thumbUrl:"../../assets/thumbs/meadlabelthumb.jpg",
-            url: "../../assets/pictures/meadlabel.jpg",
-            description: "Label for mead wine"},
-            {id: 3, title:"Pittsburgh Mural",
-            thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
-            url:"../../assets/pictures/pittsburghmural.JPG",
-            description:"Mural of the city of Pittsburgh with older style stadiums"}
-        ],
-    }),
-    props:[{
-            picture:{
-                id: Number,
-                title: String,
-                thumbUrl: String,
-                url: String,
-                description: String
-            }
-        }],
-  //analogous to vue Computed
-    getters: {
-        getAllPictures: state => state.Pictures 
+    state:{
+        Pictures:[],
+        //Id is not defined, somehow....
+        picture:{
+            id: "",
+            title: "",
+            thumbUrl: "",
+            url: "",
+            description: ""
+        }
     },
   //analogous to vue Methods: Business logic
   //commit or store.dispatch the mutation to touch the data asynchonously
@@ -53,14 +32,16 @@ const store = new Vuex.Store({
         addPicture(context){
             context.commit('ADD_PICTURE');
         },
-        getPicture(context){
-            context.commit('GET_PICTURE');
+
+        setThumbs(context){
+            context.commit('SET_THUMBS');
         }
     },
   //Commit and Track changes to the State. this must be done synchronously
   //This is where the actual magic happens: Data management
     mutations: {
-        SET_PICTURE:(state)=>{
+        SET_PICTURE(state){
+            state.picture.id = this.setId();
             state.picture.title = this.title;
             state.picture.url = this.url;//replace this with an API call to set an id when added to the gallery
             state.picture.description = this.description;
@@ -69,27 +50,45 @@ const store = new Vuex.Store({
         },
 
         ADD_PICTURE(state){
-            state.Pictures.unshift(this.picture);
+            state.Pictures.push(state.picture);
         }, 
 
-        GET_PICTURE(state){
-            pictures.map.filter(picture.id);
+        DELETE_PICTURE(state){
+            let imgs = state.Pictures.filter(state => state.picture.id !== id);
+            state.Pictures = imgs;
+        },
+        SET_THUMBS(state){
+            var windowHeight = window.screen.height;
+            var windowWidth = window.screen.width;
+            
+            if(windowWidth <= 640 || windowHeight <= 640){
+                for(let pic in state.Pictures){
+                    pic.thumbURL.replace("thumbs", "thumbsmall");
+                }
+            }
+        }
+    },
+    methods:{
+        setId(){
+            let newid = uuidv4();
+            for(let i = 0; i < state.Pictures.length; i++){
+                if(state.Pictures[i].id.valueOf() !== newid){
+                    continue;
+                }else{
+                    this.setId();
+                }
+            }
+            this.id = newid;
+        }
+
+    },
+      //analogous to vue Computed
+      getters: {
+        getAllPictures: state => state.Pictures,
+        getPicture(state){
+            let pic = state.Pictures.map.filter(picture.id);
+            return pic;
         }
     }
-    
-      /*Figure out where to put these:
-
-      _getImageById: (state) => (id) => {
-          return state.images.find(image => image.id === id);
-      },
-      //get all images
-      getImages:(state)=>{
-          return state.images;
-      },
-      //delete image
-      deleteImageById: (state) => (id) => {
-          return state.images.filter(image => image.id !== id)
-      },
-      */
  
-});
+};

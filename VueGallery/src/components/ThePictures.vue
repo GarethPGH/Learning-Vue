@@ -1,36 +1,29 @@
 <template>
     <div> 
-        <div v-for="Picture in Pictures" v-bind:key="Picture.id">
-            <div v-bind:style="normal">
-                    <h2>{{Picture.title}}</h2>
-                    <a :href="Picture.url"><img v-bind:src="Picture.thumbUrl" v-bind:alt="Picture.description" @onclick="showPicture" v-bind:style="normal"/></a>
+        <div v-for="picture in Pictures" v-bind:key="picture.id">
+            <div v-bind:style="normal"  :display = "display1">
+                    <h2>{{picture.title}}</h2>
+                    <a :href="picture.url"><img v-bind:src="picture.thumbUrl" v-bind:alt="picture.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
             </div>
+            <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
         </div>
     </div>
 </template>
 <script>
 import {mapState} from 'vuex';
-import Pictures from '../store/index.js';
+import OpenPicture from './OpenPicture.vue';
+//import state from '../store/index.js';
 
 export default {
   
-    name: ThePictures,
-    //this might end up being a part of the vuex store instead, 
-    //but should be the main images component that stores the images 
-    //and how they should be displayed on page,
-    
-    //Included for when I am ready to have a formatted page with the picture in it along the lines of title, image, description underneath
+    name: "ThePictures",
+
     components:{
-        //OpenPicture
+        
+        OpenPicture
     },
-/*!!!!!!!!!!!!! What I need to do
-!!!!!!!!!!!!!!! Change HREF in each picture to openpicture page created by openpicture.vue 
-!!!!!!!!!!!!!!! there should be a large square for the image
-!!!!!!!!!!!!!!! click should use the filter images by id in the store to display the image with the corresponding id
-!!!!!!!!!!!!!!! change image buttons to use smaller images that just forecast the href as a prop to the openpicture page
-*/
-    data:()=>{
-      
+   
+    data:()=>{ 
         return {
             normal:{
                 display: "flex",
@@ -43,6 +36,8 @@ export default {
                 "max-height":"50vh",
                 //border: "5px solid rgb(25, 65, 141)"
             },
+            display1: "flex",
+            display2: "none"
         }
     },
 
@@ -52,18 +47,18 @@ export default {
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
         //I am not sure exactly how to do that. 
         //Passing a prop maybe? 
-
-        SetThumbnailSize: ()=>{
-            var aPic = store.dispatch("getPicture");
-
-            var windowHeight = window.screen.height;
-            var windowWidth = window.screen.width;
-            
-            if(windowWidth <= 640 || windowHeight <= 640){
-                aPic.thumbURL.replace("thumbs", "thumbsmall");
-                store.commit(SET_PICTURE);
-            }
+        openThePicture:()=>{
+            this.display1 = "none";
+            this.display2 = "block";
+        },
+        
+        SetThumbnailSize:()=>{
+            this.$store.commit('SET_THUMBS');
+        },
+        emitting(){
+            console.log("recieved");
         }
-    }
+    },
+    created(){this.SetThumbnailSize();}
 }
 </script>

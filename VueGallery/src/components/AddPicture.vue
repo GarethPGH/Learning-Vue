@@ -13,7 +13,7 @@
 import {mapActions} from 'vuex';
 
 export default {
-    //name: AddPicture,
+    name: "AddPicture",
 
     model:{
 
@@ -35,7 +35,7 @@ export default {
             newPicture.url=this.url;//Switch this with API call
             //Actually Id and API call should happen in the Vuex Action right?
 
-            this.store.dispatch('setPicture', newPicture);
+            this.$store.dispatch('setPicture', newPicture);
         },
         setPictureLocation:(e)=>{
             e.preventDefault;
