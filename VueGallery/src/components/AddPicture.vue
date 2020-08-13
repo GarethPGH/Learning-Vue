@@ -1,5 +1,6 @@
 <template>
     <form>
+        <!--Turn this button into a panel that can read files from the filesystem-->
         <button type="AddsFiles" @onclick="setPictureLocation"><label>Add Image</label></button>
         <input type="text" v-model="location" placeholder="Add a new Image" />
         <input type="text" v-model="title" placeholder="Image Name"/>

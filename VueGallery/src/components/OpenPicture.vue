@@ -1,9 +1,10 @@
 <template>
-<div>
+<div :display = "absolute">
     <div>
         <h4>{{pic.title}}</h4>
     </div>
     <div>
+        <button type="button" onclick="closeMe()">Close Picture</button>
         <img :src = "pic.url"/>
     </div>
     <div>
@@ -18,10 +19,9 @@ import {mapState} from 'vuex';
 export default {
     name: "OpenPicture",
 
-    computed: mapState({
-        getAllPictures: state => state.Pictures
-    }),
-    data(){
+    computed: {...mapState()},
+    
+    data(){ 
         let pic = this.$state.getPicture();
         return pic;
     },
@@ -29,6 +29,9 @@ export default {
     methods:{
         emitting:()=>{
             this.$emit("emit");
+        },
+        closeMe:()=>{
+            this.display = "none";
         }
     },
     //Also I must extract the url from the associated picture in Pictures

@@ -57,11 +57,8 @@ export default{
             let imgs = state.Pictures.filter(state => state.picture.id !== id);
             state.Pictures = imgs;
         },
-        SET_THUMBS(state){
-            var windowHeight = window.screen.height;
-            var windowWidth = window.screen.width;
-            
-            if(windowWidth <= 640 || windowHeight <= 640){
+        SET_THUMBS(state, width, height){
+            if(width <= 640 || height <= 640){
                 for(let pic in state.Pictures){
                     pic.thumbURL.replace("thumbs", "thumbsmall");
                 }

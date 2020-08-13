@@ -1,6 +1,6 @@
 <template>
     <div> 
-        <div v-for="picture in Pictures" v-bind:key="picture.id">
+        <div v-for="picture in Pics" v-bind:key="picture.id">
             <div v-bind:style="normal"  :display = "display1">
                     <h2>{{picture.title}}</h2>
                     <a :href="picture.url"><img v-bind:src="picture.thumbUrl" v-bind:alt="picture.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
@@ -10,16 +10,14 @@
     </div>
 </template>
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 import OpenPicture from './OpenPicture.vue';
-//import state from '../store/index.js';
 
 export default {
   
     name: "ThePictures",
 
     components:{
-        
         OpenPicture
     },
    
@@ -37,23 +35,29 @@ export default {
                 //border: "5px solid rgb(25, 65, 141)"
             },
             display1: "flex",
-            display2: "none"
+            display2: "none",
+            Pics: ""
         }
     },
 
-    computed: {...mapState()},
+    computed:{
+        ...mapState({Pics: state => state.Pictures}),
+    },
 
     methods:{
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
         //I am not sure exactly how to do that. 
         //Passing a prop maybe? 
+        ...mapMutations({setThum: mutations => mutations.SET_THUMBS}),
         openThePicture:()=>{
             this.display1 = "none";
             this.display2 = "block";
         },
         
         SetThumbnailSize:()=>{
-            this.$store.commit('SET_THUMBS');
+            var windowHeight = window.screen.height;
+            var windowWidth = window.screen.width;
+            this.commit(setThum(windowHeight, windowWidth));
         },
         emitting(){
             console.log("recieved");
