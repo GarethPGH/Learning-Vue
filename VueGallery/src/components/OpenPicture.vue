@@ -14,15 +14,15 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
     name: "OpenPicture",
 
-    computed: {...mapState()},
+    computed: {...mapGetters({getPic: getters => getters.getPicture})},
     
     data(){ 
-        let pic = this.$state.getPicture();
+        let pic = this.getPic;
         return pic;
     },
     //I will have to pass a prop to bubble the @click event to this component from Pictures.vue

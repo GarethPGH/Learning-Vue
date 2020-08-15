@@ -1,16 +1,16 @@
 <template>
     <div> 
-        <div v-for="picture in Pics" v-bind:key="picture.id">
+        <div v-for="pic in Pics" v-bind:key="pic.id">
             <div v-bind:style="normal"  :display = "display1">
-                    <h2>{{picture.title}}</h2>
-                    <a :href="picture.url"><img v-bind:src="picture.thumbUrl" v-bind:alt="picture.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
+                    <h2>{{pic.title}}</h2>
+                    <a :href="pic.url"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
             </div>
             <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
         </div>
     </div>
 </template>
 <script>
-import {mapState, mapMutations} from 'vuex';
+import {mapState, mapActions, mapGetters} from 'vuex';
 import OpenPicture from './OpenPicture.vue';
 
 export default {
@@ -36,28 +36,36 @@ export default {
             },
             display1: "flex",
             display2: "none",
-            Pics: ""
+            Pics: "",
+            id: "",
+            title: "",
+            url: "",
+            thumbUrl: "",
+            description: ""
         }
     },
 
     computed:{
-        ...mapState({Pics: state => state.Pictures}),
+        ...mapState({Pics: state => state.Pictures}, {pic: state => state.picture}, {id: state => state.picture_id}, {title: state => state.picture_title}, {url: state => state.picture_url}, {thumbUrl: state => state.picture_thumbUrl}, {description: state => state.picture_description}),
     },
 
     methods:{
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
         //I am not sure exactly how to do that. 
         //Passing a prop maybe? 
-        ...mapMutations({setThum: mutations => mutations.SET_THUMBS}),
+        ...mapActions({setThum: actions => actions.setThumbs}),
+        ...mapGetters({getPictures: getters => getters.getAllPictures}),
+
         openThePicture:()=>{
             this.display1 = "none";
             this.display2 = "block";
         },
         
         SetThumbnailSize:()=>{
+            let thumbs = this.setThum();
             var windowHeight = window.screen.height;
             var windowWidth = window.screen.width;
-            this.commit(setThum(windowHeight, windowWidth));
+            this.commit(thumbs(windowHeight, windowWidth));
         },
         emitting(){
             console.log("recieved");

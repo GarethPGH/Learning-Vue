@@ -2,15 +2,15 @@
     <form>
         <!--Turn this button into a panel that can read files from the filesystem-->
         <button type="AddsFiles" @onclick="setPictureLocation"><label>Add Image</label></button>
-        <input type="text" v-model="location" placeholder="Add a new Image" />
-        <input type="text" v-model="title" placeholder="Image Name"/>
-        <input type="text" v-model="description" placeholder="Describe your Image"/>
+        <label>Add Image</label><input type="text" v-model="location" placeholder="Add a new Image" />
+        <label>Title</label><input type="text" v-model="title" placeholder="Image Name"/>
+        <label>Description</label><input type="text" v-model="description" placeholder="Describe your Image"/>
         <button type="submit" @onclick ="addNewPicture">Submit</button>
     </form>
 </template>
 
 <script>
-//I may turn this into a header type file, though likely won't matter for a SPA
+//figure out how to build a payload for the setPicture action
 import {mapActions} from 'vuex';
 
 export default {
@@ -24,7 +24,7 @@ export default {
     },
  
     computed:{
-        ...mapActions(['setPicture'])
+        ...mapActions({setPic: actions => actions.setPicture})
     },
     methods:{
         addNewPicture:(e)=>{

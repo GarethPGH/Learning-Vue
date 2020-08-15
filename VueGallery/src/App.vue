@@ -6,45 +6,47 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
 import store from './store/index.js';
 import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
-//import OpenPicture from './components/OpenPicture';
+import OpenPicture from './components/OpenPicture';
 
 export default {
   name: 'App',
   //This needs and add images, images (may be moved to store for vuex), home image gallery
-  store,
+  store: store,
 
   components: {
       AddPicture,
       ThePictures,
+      OpenPicture
   },
   methods:{
-
+    ...mapActions({setPicture: actions => actions.setPicture})
   },
+
   created(){
-    let pic1 = new store.picture({id: 0, title:"Fox Mural",
-          thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
-          url:"../../assets/pictures/foxmural.jpg", 
-          description:"Mural of fox family with Spring flowers"});
-    let pic2 = new store.picture({id: 1, title:"Fox Painting",
-          thumbUrl:"../../assets/thumbs/foxpaintingthumb.jpg",
-          url:"../../assets/pictures/foxpainting.jpg",
-          description:"Painting of a fox on wood slab backed by wisteria flowers"});
-    let pic3 = new store.picture(      {id: 2, title:"Mead Label",
-          thumbUrl:"../../assets/thumbs/meadlabelthumb.jpg",
-          url: "../../assets/pictures/meadlabel.jpg",
-          description: "Label for mead wine"});
-    let pic4 = new store.picture(
-          {id: 3, title:"Pittsburgh Mural",
-          thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
-          url:"../../assets/pictures/pittsburghmural.JPG",
-          description:"Mural of the city of Pittsburgh with older style stadiums"});
-    store.addPicture(pic1);
-    store.addPicture(pic2);
-    store.addPicture(pic3);
-    store.addPicture(pic4);
+    let pic1 = {picture_id: '0', picture_title:"Fox Mural",
+          picture_thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
+          picture_url:"../../assets/pictures/foxmural.jpg", 
+          picture_description:"Mural of fox family with Spring flowers"};
+    let pic2 = {picture_id: '1', picture_title:"Fox Painting",
+          picture_thumbUrl:"../../assets/thumbs/foxpaintingthumb.jpg",
+          picture_url:"../../assets/pictures/foxpainting.jpg",
+          picture_description:"Painting of a fox on wood slab backed by wisteria flowers"};
+    let pic3 = {picture_id: '2', picture_title:"Mead Label",
+          picture_thumbUrl:"../../assets/thumbs/meadlabelthumb.jpg",
+          picture_url: "../../assets/pictures/meadlabel.jpg",
+          picture_description: "Label for mead wine"};
+    let pic4 = {picture_id: '3', picture_title:"Pittsburgh Mural",
+          picture_thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
+          picture_url:"../../assets/pictures/pittsburghmural.JPG",
+          picture_description:"Mural of the city of Pittsburgh with older style stadiums"};
+    store.setPicture(pic1);
+    store.setPicture(pic2);
+    store.setPicture(pic3);
+    store.setPicture(pic4);
   }
 }
 </script>
