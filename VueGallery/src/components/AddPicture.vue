@@ -10,17 +10,18 @@
 </template>
 
 <script>
-//figure out how to build a payload for the setPicture action
+//Will have to figure out how to create a thumbnail dynamically 
 import {mapActions} from 'vuex';
 
 export default {
     name: "AddPicture",
 
-    model:{
-
-        title: "Image Title",
-        description: "Image Description",
-        location: "location.jpg"
+    data(){
+        return{
+            title: "Image Title",
+            description: "Image Description",
+            location: "location.jpg"
+        }
     },
  
     computed:{

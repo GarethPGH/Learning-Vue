@@ -1,6 +1,6 @@
 <template>
     <div> 
-        <div v-for="pic in Pics" v-bind:key="pic.id">
+        <div v-for="pic in getPictures" v-bind:key="pic.id">
             <div v-bind:style="normal"  :display = "display1">
                     <h2>{{pic.title}}</h2>
                     <a :href="pic.url"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
@@ -47,15 +47,15 @@ export default {
 
     computed:{
         ...mapState({Pics: state => state.Pictures}, {pic: state => state.picture}, {id: state => state.picture_id}, {title: state => state.picture_title}, {url: state => state.picture_url}, {thumbUrl: state => state.picture_thumbUrl}, {description: state => state.picture_description}),
+        ...mapActions({setThum: actions => actions.setThumbs}),
+        ...mapGetters({getPictures: getters => getters.getPictures})
     },
 
     methods:{
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
         //I am not sure exactly how to do that. 
         //Passing a prop maybe? 
-        ...mapActions({setThum: actions => actions.setThumbs}),
-        ...mapGetters({getPictures: getters => getters.getAllPictures}),
-
+    
         openThePicture:()=>{
             this.display1 = "none";
             this.display2 = "block";
