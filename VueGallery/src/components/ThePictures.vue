@@ -46,15 +46,15 @@ export default {
     },
 
     computed:{
-        ...mapState({Pics: state => state.Pictures}, {pic: state => state.picture}, {id: state => state.picture_id}, {title: state => state.picture_title}, {url: state => state.picture_url}, {thumbUrl: state => state.picture_thumbUrl}, {description: state => state.picture_description}),
-        ...mapActions({setThum: actions => actions.setThumbs}),
-        ...mapGetters({getPictures: getters => getters.getPictures})
+        ...mapState({Pics: 'state.Pictures'}, {pic: 'state.picture'}, {id: 'state.picture_id'}, {title: 'state.picture_title'}, {url: 'state.picture_url'}, {thumbUrl: 'state.picture_thumbUrl'}, {description: 'state.picture_description'}),
     },
 
     methods:{
         //For right now, the thumbnails work but I want to be able to open a new page featuring the image in a separate component
         //I am not sure exactly how to do that. 
-        //Passing a prop maybe? 
+        //Passing a prop maybe?
+        ...mapActions({setThum: 'setThumbs'}),
+        ...mapGetters({getPictures: 'getPictures'}), 
     
         openThePicture:()=>{
             this.display1 = "none";

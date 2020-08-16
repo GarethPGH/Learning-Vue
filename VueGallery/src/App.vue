@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import store from './store/index.js';
 import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
-import OpenPicture from './components/OpenPicture';
+//import OpenPicture from './components/OpenPicture';
 
 export default {
   name: 'App',
@@ -20,10 +20,11 @@ export default {
   components: {
       AddPicture,
       ThePictures,
-      OpenPicture
+      //OpenPicture
   },
-  methods:{
-    ...mapActions({setPicture: actions => actions.setPicture})
+  computed:{
+    ...mapActions({setPicture: 'setPicture'}),
+    ...mapGetters({getPictures: 'getPictures'})
   },
 
   created(){
@@ -43,10 +44,10 @@ export default {
           picture_thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
           picture_url:"../../assets/pictures/pittsburghmural.JPG",
           picture_description:"Mural of the city of Pittsburgh with older style stadiums"};
-    store.setPicture(pic1);
-    store.setPicture(pic2);
-    store.setPicture(pic3);
-    store.setPicture(pic4);
+    this.setPicture(pic1);
+    this.setPicture(pic2);
+    this.setPicture(pic3);
+    this.setPicture(pic4);
   }
 }
 </script>

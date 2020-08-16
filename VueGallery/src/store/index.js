@@ -7,46 +7,54 @@ Vue.use(Vuex);
 const state = {
     Pictures:[],
     picture:[],
-    picture_id: "",
-    picture_title: "",
-    picture_thumbUrl: "",
-    picture_url: "",
-    picture_description: ""
+    picture_id: "blah",
+    picture_title: "blah",
+    picture_thumbUrl: "blah",
+    picture_url: "blah",
+    picture_description: "blah"
 };
 
 const actions = {
-    setPicture:(context, payload)=>{
-        context.commit(SET_PICTUREID, payload.id);
-        context.commit(SET_PICTURETITLE, payload.title);
-        context.commit(SET_PICTUREURL, payload.url);
-        context.commit(SET_PICTURETHUMBURL, payload.thumbUrl);
-        context.commit(SET_PICTUREDESCRIPTION, payload.description);
-        context.commit('SET_PICTURE', payload);
+    setPictureId:({commit}, payload)=>{
+        commit('SET_PICTUREID', payload.id);
     },
-
+    setPictureTitle:({commit}, payload)=>{
+        commit('SET_PICTURETITLE', payload.title);
+    },
+    setPictureUrl:({commit}, payload)=>{
+        commit('SET_PICTUREURL', payload.url);
+    },
+    setPictureThumb:({commit}, payload)=>{
+        commit('SET_PICTURETHUMBURL', payload.thumbUrl);
+    },
+    setPictureDescription:({commit}, payload)=>{
+        commit('SET_PICTUREDESCRIPTION', payload.description);
+    },
+    setPicture:({commit}, payload)=>{
+        commit('SET_PICTURE', payload);
+    },
     setThumbs:(context, height, width)=>{
         context.commit('SET_THUMBS', height, width);
     }
 };
 
 const mutations = {
-    SET_PICTUREID: (state, id) => (state.picture_id = id),
+    SET_PICTUREID:(state, id) => {
+        let pic_id = methods.setId(id);
+        state.picture_id = pic_id},
     SET_PICTURETITLE:(state, title) => (state.picture_title = title),
     SET_PICTUREURL:(state, url) => (state.picture_url = url),
-    SET_PICTURETHUMBURL:(state, thumbUrl) => (state.picture_thumbUrl = thumbUrl),
+    SET_PICTURETHUMB:(state, thumbUrl) => (state.picture_thumbUrl = thumbUrl),
     SET_PICTUREDESCRIPTION:(state, description) => (state.picture_description = description),
-    SET_PICTURE: (state, payload)=>{
+    SET_PICTURE:(state, payload)=>{
         let pict = methods.makePicture();
-        let id = payload.id;
-        if(id === "" || id === undefined || id === null){
-            id = methods.setId();
-        }
+
         pict.picture_id = payload.id;
         pict.picture_title = payload.title;
         pict.picture_url = payload.url;//replace this with an API call to set an id when added to the gallery
-        pict.picture_description = payload.description;
         pict.picture_thumbUrl = payload.thumbUrl;
-
+        pict.picture_description = payload.description;
+     
         state.Pictures.push(pict);
     },
 
@@ -64,16 +72,20 @@ const mutations = {
     }
 };
 const methods = {
-    setId(){
-        let newid = uuidv4();
+    setId(id){
+        if(id === null || id === undefined || id === ""){
+            id = "id";
+        }
+        id = uuidv4();
         let len = this.$state.Pictures.length;
+        let check_id = ""; 
         for(let i = 0; i < len; i++){
-            if(this.$state.Pictures[i].picture_id.valueOf() === newid){
-                this.setId();
-            }else{
-                this.id = newid;
+            check_id = this.$state.Pictures[i].picture_id.valueOf();
+            if(check_id === id){
+                id = this.setId(id);
             }
         }
+        this.$state.picture_id = id;
     },
         
     makePicture(){
@@ -92,7 +104,6 @@ const getters = {
 };
 
 export default new Vuex.Store({
-    strict: process.env.NODE_ENV !== 'production',
     state,
     actions,
     mutations,

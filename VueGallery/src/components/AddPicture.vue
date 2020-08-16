@@ -25,19 +25,25 @@ export default {
     },
  
     computed:{
-        ...mapActions({setPic: actions => actions.setPicture})
+        ...mapActions({setPic: 'setPicture'})
     },
     methods:{
         addNewPicture:(e)=>{
             e.preventDefault;
-            let picOb = {title:"",description:"",url:""}
+            //Create Picture object to take input values
+            let picOb = {id:"", title:"", url:"", thumbUrl:"",description:""}
             let newPicture = new picOb();
             newPicture.title = this.title;
             newPicture.description = this.description;
-            newPicture.url=this.url;//Switch this with API call
-            //Actually Id and API call should happen in the Vuex Action right?
+            newPicture.url = this.url;
+            
+            //Look up how to actually create a thumbnail of the appropriate size based on image upload automatically
+            let split = this.url;
+            split.split('.');
+            let thumb = split[0] + "thumb" + split[1];
+            newPicture.thumbUrl = thumb;
 
-            this.$store.dispatch('setPicture', newPicture);
+            this.setPic(newPicture);
         },
         setPictureLocation:(e)=>{
             e.preventDefault;
