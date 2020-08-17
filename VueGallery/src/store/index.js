@@ -66,17 +66,16 @@ const methods = {
         let picture = {picture_id:"", picture_title:"", picture_url:"", picture_thumbUrl:"", picture_description:""};
         return picture;
     },
-
-    filterPics(id){
-        state => state.Pictures.picture_id.valueOf() === id
-    }
 };
     
 const getters = {
     getPictures: () => state.Pictures,
     getPicture: (id)=>{
-       let pic = methods.filterPics(id);
-       return pic.valueOf();
+        let pic = methods.makePicture();
+        if(state.pictures){
+            pic = state.filter(state.Pictures.picture_id === id);
+        }
+        return pic;
     }
 };
 export default new Vuex.Store({

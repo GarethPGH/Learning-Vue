@@ -1,16 +1,18 @@
 <template>
     <div> 
-        <div v-for="pic in thePictures" v-bind:key="pic.id">
-            <div v-bind:style="normal"  :display = "display1">
+        <div v-if="Pictures">
+            <div v-for="pic in thePictures" v-bind:key="pic.id">
+                <div v-bind:style="normal"  :display = "display1">
                     <h2>{{pic.title}}</h2>
                     <a :href="pic.url"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
+                </div>
+                <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
             </div>
-            <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
         </div>
     </div>
 </template>
 <script>
-import {mapState, mapActions, mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 import OpenPicture from './OpenPicture.vue';
 import store from '../store/index.js';
 
@@ -39,7 +41,7 @@ export default {
             },
             display1: "flex",
             display2: "none",
-            thePictures:[],
+            somePictures:[],
             id: "",
             title: "",
             url: "",
@@ -49,11 +51,12 @@ export default {
     },
 
     computed:{
-        ...mapState({Pics: 'state.Pictures'}, {pic: 'state.picture'}, {id: 'state.picture_id'}, {title: 'state.picture_title'}, {url: 'state.picture_url'}, {thumbUrl: 'state.picture_thumbUrl'}, {description: 'state.picture_description'}),
+        //...mapState({Pictures: 'state.Pictures'}),
+        //getThePictures:{somePictures: Pictures}
         ...mapGetters({getThePictures: "getPictures"}),
-        
+        //Unexpected Side Effect in Computed Property
         getThePictures: {
-            get(){return store.getters.getPictures},
+           get(){return this.somePictures = store.getters.getPictures},
             set (value){store.dispatch('setPicture', value )}
         }
     },
@@ -79,7 +82,7 @@ export default {
         }
     },
     mounted(){
-        this.thePictures = this.getThePictures;
+        //this.somePictures = this.Pictures;
         this.SetThumbnailSize();
     }
 }
