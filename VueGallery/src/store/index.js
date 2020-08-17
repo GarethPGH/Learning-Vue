@@ -5,31 +5,10 @@ import {v4 as uuidv4 } from 'uuid';
 Vue.use(Vuex);
 
 const state = {
-    Pictures:[],
-    picture:[],
-    picture_id: "blah",
-    picture_title: "blah",
-    picture_thumbUrl: "blah",
-    picture_url: "blah",
-    picture_description: "blah"
+    Pictures:[]
 };
 
 const actions = {
-    setPictureId:({commit}, payload)=>{
-        commit('SET_PICTUREID', payload.id);
-    },
-    setPictureTitle:({commit}, payload)=>{
-        commit('SET_PICTURETITLE', payload.title);
-    },
-    setPictureUrl:({commit}, payload)=>{
-        commit('SET_PICTUREURL', payload.url);
-    },
-    setPictureThumb:({commit}, payload)=>{
-        commit('SET_PICTURETHUMBURL', payload.thumbUrl);
-    },
-    setPictureDescription:({commit}, payload)=>{
-        commit('SET_PICTUREDESCRIPTION', payload.description);
-    },
     setPicture:({commit}, payload)=>{
         commit('SET_PICTURE', payload);
     },
@@ -39,13 +18,6 @@ const actions = {
 };
 
 const mutations = {
-    SET_PICTUREID:(state, id) => {
-        let pic_id = methods.setId(id);
-        state.picture_id = pic_id},
-    SET_PICTURETITLE:(state, title) => (state.picture_title = title),
-    SET_PICTUREURL:(state, url) => (state.picture_url = url),
-    SET_PICTURETHUMB:(state, thumbUrl) => (state.picture_thumbUrl = thumbUrl),
-    SET_PICTUREDESCRIPTION:(state, description) => (state.picture_description = description),
     SET_PICTURE:(state, payload)=>{
         let pict = methods.makePicture();
 
@@ -59,7 +31,7 @@ const mutations = {
     },
 
     DELETE_PICTURE: (state, id)=>{
-        let imgs = state.Pictures.filter(state => state.picture_id !== id);
+        let imgs = state.Pictures.filter(this.picture_id !== id);
         state.Pictures = imgs;
     },
 
@@ -77,32 +49,36 @@ const methods = {
             id = "id";
         }
         id = uuidv4();
-        let len = this.$state.Pictures.length;
-        let check_id = ""; 
+        let len = state.Pictures.length;
+        let check_id = "";
+        let pic = ""; 
         for(let i = 0; i < len; i++){
-            check_id = this.$state.Pictures[i].picture_id.valueOf();
+            pic = state.Pictures[i];
+            check_id = pic.picture_id.valueOf();
             if(check_id === id){
                 id = this.setId(id);
             }
         }
-        this.$state.picture_id = id;
+        this.picture_id = id;
     },
         
     makePicture(){
-        let picture = {picture_id, picture_title, picture_url, picture_thumbUrl, picture_description};
+        let picture = {picture_id:"", picture_title:"", picture_url:"", picture_thumbUrl:"", picture_description:""};
         return picture;
-    }
+    },
 
+    filterPics(id){
+        state => state.Pictures.picture_id.valueOf() === id
+    }
 };
     
 const getters = {
-    getPictures: (state) => state.Pictures,
-    getPicture: (state)=>{
-        let pic = this.$state.Pictures.map.filter(picture_id);
-        return pic;
+    getPictures: () => state.Pictures,
+    getPicture: (id)=>{
+       let pic = methods.filterPics(id);
+       return pic.valueOf();
     }
 };
-
 export default new Vuex.Store({
     state,
     actions,

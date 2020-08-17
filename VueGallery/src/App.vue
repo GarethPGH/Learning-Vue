@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 import store from './store/index.js';
 import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
@@ -24,10 +24,10 @@ export default {
   },
   computed:{
     ...mapActions({setPicture: 'setPicture'}),
-    ...mapGetters({getPictures: 'getPictures'})
+    //...mapGetters({getPictures: 'getPictures'})
   },
 
-  created(){
+  created: function(){
     let pic1 = {picture_id: '0', picture_title:"Fox Mural",
           picture_thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
           picture_url:"../../assets/pictures/foxmural.jpg", 
@@ -44,10 +44,10 @@ export default {
           picture_thumbUrl:"../../assets/thumbs/pittsburghmuralthumb.jpg",
           picture_url:"../../assets/pictures/pittsburghmural.JPG",
           picture_description:"Mural of the city of Pittsburgh with older style stadiums"};
-    this.setPicture(pic1);
-    this.setPicture(pic2);
-    this.setPicture(pic3);
-    this.setPicture(pic4);
+    store.dispatch('setPicture', pic1);
+    store.dispatch('setPicture', pic2);
+    store.dispatch('setPicture', pic3);
+    store.dispatch('setPicture', pic4);
   }
 }
 </script>
