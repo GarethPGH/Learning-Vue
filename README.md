@@ -1,5 +1,7 @@
 # Learning Vue
- An attempt to learn Vue.js by creating an image slideshow app
+ TLDR: Created a Vue Gallery. It works, contains Vuex state management, but right now is hard-coded, and does not feature a backend.
+ Will find a CMS to use, and add routing/ http requests. 
+ Vuex is probably more complicated a state management solution than the project actually needs, but figured it was worth the learning experience to use.
  
  Using an altered .NET Core app in Visual Studio, to write Javascript using Vue nuget package
  following this tutorial: https://docs.microsoft.com/en-us/visualstudio/javascript/create-application-with-vuejs?view=vs-2019
@@ -35,6 +37,8 @@ App does not work once you add JSONPlaceholder to your dependancies to simulate 
 <br />  
 
 7:) Rewrote HelloWorld using render functions instead of templates. While not exactly as the original example, it functions. 
+<br/>
+8:) Vue Gallery now has Vuex state management, and works, at least, for the examples I provided in the project
 </br >
 ### Goals:
 <br />
