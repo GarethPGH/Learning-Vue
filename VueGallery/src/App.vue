@@ -6,15 +6,14 @@
 </template>
 
 <script>
-//import {mapActions} from 'vuex';
+//import axios from 'axios';
 import store from './store/index.js';
 import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
-//import OpenPicture from './components/OpenPicture';
 
 export default {
   name: 'App',
-  //This needs and add images, images (may be moved to store for vuex), home image gallery
+  
   store: store,
 
   components: {
