@@ -1,11 +1,10 @@
 # Learning Vue
- An attempt to learn Vue.js by creating an image slideshow app
- 
- Using an altered .NET Core app in Visual Studio, to write Javascript using Vue nuget package
- following this tutorial: https://docs.microsoft.com/en-us/visualstudio/javascript/create-application-with-vuejs?view=vs-2019
+ TLDR: Created a Vue Gallery. It works, contains Vuex state management, but right now is hard-coded, and does not feature a backend.
+ Will find a CMS to use, and add routing/ http requests. 
+ Vuex is probably more complicated a state management solution than the project actually needs, but figured it was worth the learning experience to use.
  <br />
  ### What I have learned from this project:
- 1:) Using Visual Studio 2017 and the hack above to host a Vue Application in IIS is convoluted and annoying. Constant issues with mounting the app in .vue files, using a version of VS that is not built to handle .vue files (they are .js files with a renamed extension). Using the vue nuget package did not work. C#/Razor backend kept wanting to override Vue when it came to rendering the start page.  
+ 1:) Using Visual Studio 2017 to host a Vue Application in IIS is convoluted and annoying. Constant issues with mounting the app in .vue files, using a version of VS that is not built to handle .vue files (they are .js files with a renamed extension). Using the vue nuget package did not work. C#/Razor backend kept wanting to override Vue when it came to rendering the start page.  
 <br />
  2:) Using Visual Studio 2019 built-in templates was annoying. Apparently, they aren't actually kept up to date with Vue's ecosystem, or only work for limited projects. If you can get them to work, great! I could not.  
 <br />
@@ -35,6 +34,8 @@ App does not work once you add JSONPlaceholder to your dependancies to simulate 
 <br />  
 
 7:) Rewrote HelloWorld using render functions instead of templates. While not exactly as the original example, it functions. 
+<br/>
+8:) Vue Gallery now has Vuex state management, and works, at least, for the examples I provided in the project
 </br >
 ### Goals:
 <br />
