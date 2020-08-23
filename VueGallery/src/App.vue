@@ -6,7 +6,6 @@
 </template>
 
 <script>
-//import axios from 'axios';
 import store from './store/index.js';
 import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
