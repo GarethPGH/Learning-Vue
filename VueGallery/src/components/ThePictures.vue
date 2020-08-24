@@ -1,10 +1,11 @@
 <template>
     <div> 
+        <AddPicture></AddPicture>
         <div v-if="Pictures">
             <div v-for="pic in Pictures" v-bind:key="pic.id">
                 <div v-bind:style="normal">
                     <h2>{{pic.title}}</h2>
-                    <a :href="pic.url"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></a>
+                    <router-link to = "/pic"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></router-link>
                 </div>
                 <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
             </div>
@@ -13,6 +14,7 @@
 </template>
 <script>
 import {mapActions} from 'vuex';
+import AddPicture from './AddPicture.vue';
 import OpenPicture from './OpenPicture.vue';
 import store from '../store/index.js';
 
@@ -23,7 +25,8 @@ export default {
     store: store,
 
     components:{
-       OpenPicture
+       OpenPicture,
+       AddPicture
     },
    
     data:()=>{ 
@@ -47,6 +50,7 @@ export default {
             description: ""
         }
     },
+
 
     computed:{
         Pictures(){

@@ -10,37 +10,38 @@ const state = {
 };
 
 const actions = {
-
+    
+//Replace jsonplaceholder with backend url
 async setPictures({commit}){  
-    const response = await axios.get('urlendpoint')
+    const response = await axios.get('https://jsonplaceholder.typicode.com/photos')
         .catch(function(error){
             console.log(error);
     });
     commit('setPictures', response.data)
 },
 async getPicture({context}, id){
-    const response = await axios.get('urlendpoint/{id}')
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`)
         .catch(function(error){
             console.log(error);
     });
-    context.getters.getPicture(id)
+    context.getters.getPicture(response.id)
 },
 async editPicture({commit}, id){
-    const response = await axios.put('urlendpoint/{id}')
+    const response = await axios.put(`https://jsonplaceholder.typicode.com/photos/${id}`)
         .catch(function(error){
             console.log(error);
     });
     commit('SET_PICTURE', response.data)
 },
 async addPicture({commit}, picture){
-    const response = await axios.post('urlendpoint',{picture.id, picture.title, picture.url, picture.thumburl, picture.description})
+    const response = await axios.post('uhttps://jsonplaceholder.typicode.com/photos', picture)
         .catch(function(error){
             console.log(error);
-    }),
+    });
     commit('SET_PICTURE', response.data)
 },
-async deletePicture({commit}){
-    await axios.delete('urlendpoint/{id}')
+async deletePicture({commit}, id){
+    await axios.delete(`https://jsonplaceholder.typicode.com/photos/${id}`)
         .catch(function(error){
             console.log(error);
     }),
@@ -63,9 +64,9 @@ async deletePicture({commit}){
 //have set picture call it, if needed, to facilitate Get Requests
 const mutations = {
     
-    setPictures(state, Pictures): (state.Pictures = Pictures),
-    newPicture(state, picture): state.Pictures.unshift(picture),
-    removePicture(state, id): (state.Pictures = state.Pictures.filter(picture => picture.id !== picture.id))
+    setPictures: (state, Pictures)=> state.Pictures = Pictures,
+    newPicture: (state, picture)=> state.Pictures.unshift(picture),
+    removePicture: (state, id)=> state.Pictures = state.Pictures.filter(picture => picture.id !== id),
      
     SET_PICTURE:(state, payload)=>{
         let pict = methods.makePicture();

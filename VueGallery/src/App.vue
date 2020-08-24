@@ -1,24 +1,25 @@
 <template>
   <div id="app">
-    <AddPicture></AddPicture>
-    <ThePictures></ThePictures>
+    <router-link to ='/'>Pics</router-link>
   </div>
 </template>
 
 <script>
 import store from './store/index.js';
-import AddPicture from './components/AddPicture.vue';
 import ThePictures from './components/ThePictures.vue';
-
+import router from './router.js';
+//Fixing Vue Router in router.js file
 export default {
   name: 'App',
   
   store: store,
 
+  router: router,
+
   components: {
-      AddPicture,
-      ThePictures,
-  }
+      ThePictures
+  },
+
 }
 </script>
 

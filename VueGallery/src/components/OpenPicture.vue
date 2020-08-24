@@ -14,12 +14,10 @@
 </template>
 
 <script>
-//import store from '../store/index.js';
-//import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     name: "OpenPicture",
-    //store: store,
   
     props:{
         id:{type: String}, 
@@ -31,17 +29,16 @@ export default {
     data(){ 
         return{ 
             displayValue: "block",
-           // theId: this.props.pic.id
+            theId: this.props.pic.id
         }
     },
     
-    // computed: {
-    //     ...mapGetters({getPicture: 'getPicture'}),
-    //     getPicture:{
-    //         get(){return store.getters.getPicture}
-    //     },
-    //     pic: store.getters.getPicture(this.theId),
-    // },
+    computed: {
+        ...mapGetters({getPicture: 'getPicture'}),
+        getPicture:{
+            pic: ()=> this.$store.getters.getPicture(this.theId)
+        }
+    },
     
     //I will have to pass a prop to bubble the @click event to this component from Pictures.vue
     methods:{

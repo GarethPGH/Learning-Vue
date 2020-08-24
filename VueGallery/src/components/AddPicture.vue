@@ -40,7 +40,7 @@ export default {
             //Look up how to actually create a thumbnail of the appropriate size based on image upload automatically
             let split = this.url;
             split.split('.');
-            let thumb = split[0] + "thumb" + split[1];
+            let thumb = split[0] + "thumb." + split[1];
             newPicture.thumbUrl = thumb;
 
             this.setPic(newPicture);
