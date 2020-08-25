@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-link to ='/'>Pics</router-link>
+    <ThePictures></ThePictures>
   </div>
 </template>
 

@@ -4,16 +4,16 @@
         <div v-if="Pictures">
             <div v-for="pic in Pictures" v-bind:key="pic.id">
                 <div v-bind:style="normal">
-                    <h2>{{pic.title}}</h2>
-                    <router-link to = "/pic"><img v-bind:src="pic.thumbUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></router-link>
+                    <h4>{{pic.title}}</h4>
+                    <router-link to = "/pic"><img v-bind:src="pic.thumbnailUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></router-link>
                 </div>
-                <OpenPicture :display = "display2" @emitting = "emitting()"></OpenPicture>
+                <OpenPicture v-if = "display2 === block" @emitting = "emitting()"></OpenPicture>
             </div>
         </div>
     </div>
 </template>
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, /*mapGetters,*/ mapState} from 'vuex';
 import AddPicture from './AddPicture.vue';
 import OpenPicture from './OpenPicture.vue';
 import store from '../store/index.js';
@@ -28,7 +28,7 @@ export default {
        OpenPicture,
        AddPicture
     },
-   
+   //Use CSS Grid to do layout, the dynamic flex layout isn't working for automatic placement
     data:()=>{ 
         return {
             normal:{
@@ -41,35 +41,39 @@ export default {
                 "max-width":"50vw",
                 "max-height":"50vh",
             },
-            display1: "flex",
             display2: "none",
             id: "",
             title: "",
             url: "",
-            thumbUrl: "",
-            description: ""
+            thumbnailUrl: "",
+            description: "",
         }
     },
 
 
     computed:{
-        Pictures(){
-            return this.$store.state.Pictures;
-        }
+        ...mapState({Pictures: state => state.Pictures}),
+        //...mapGetters({getPictures: 'getPictures'}),
+        
+        /*getPictures: ()=>{
+            return this.Pictures = this.$store.getPictures();
+        }*/
     },
-
+//look up how to properly use MapActions
     methods:{
-        ...mapActions({setPic: 'setPicture'},{setThumbnailSize: 'setThumbs'}),
-    
+        ...mapActions({getThePictures: 'getPictures'}),
+        getPictures(){
+            this.getThePictures();
+        },
         openThePicture:()=>{
             this.display1 = "none";
             this.display2 = "block";
         },
 
-        setPicture(pic){
+        /*setPicture(pic){
             this.setPic(pic);
-        },
-
+        },*/
+       
         setThumbs(){
             let windowHeight = window.screen.height;
             let windowWidth = window.screen.width;
@@ -82,6 +86,7 @@ export default {
     },
 
     created(){
+        /*
     let pic1 = {id: '0', title:"Fox Mural",
             thumbUrl:"../../assets/thumbs/foxmuralthumb.jpg",
             url:"../../assets/pictures/foxmural.jpg", 
@@ -103,9 +108,9 @@ export default {
     this.setPic(pic3);
     this.setPic(pic4);
 
-    console.log(this.Pictures);
-
     this.setThumbnailSize();
-  }
+  }*/
+    this.Pictures = this.getThePictures();
+    }
 }
 </script>

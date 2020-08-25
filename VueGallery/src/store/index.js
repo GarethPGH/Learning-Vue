@@ -12,12 +12,13 @@ const state = {
 const actions = {
     
 //Replace jsonplaceholder with backend url
-async setPictures({commit}){  
-    const response = await axios.get('https://jsonplaceholder.typicode.com/photos')
+async getPictures({commit}){  
+    const response = await axios.get('https://jsonplaceholder.typicode.com/photos',{params:{_limit: 20}})
         .catch(function(error){
             console.log(error);
     });
-    commit('setPictures', response.data)
+    console.log(response.data);
+    commit('set_Pictures', response.data)
 },
 async getPicture({context}, id){
     const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`)
@@ -31,9 +32,10 @@ async editPicture({commit}, id){
         .catch(function(error){
             console.log(error);
     });
+   
     commit('SET_PICTURE', response.data)
 },
-async addPicture({commit}, picture){
+async setPicture({commit}, picture){
     const response = await axios.post('uhttps://jsonplaceholder.typicode.com/photos', picture)
         .catch(function(error){
             console.log(error);
@@ -64,7 +66,7 @@ async deletePicture({commit}, id){
 //have set picture call it, if needed, to facilitate Get Requests
 const mutations = {
     
-    setPictures: (state, Pictures)=> state.Pictures = Pictures,
+    set_Pictures: (state, Pictures)=> state.Pictures = Pictures,
     newPicture: (state, picture)=> state.Pictures.unshift(picture),
     removePicture: (state, id)=> state.Pictures = state.Pictures.filter(picture => picture.id !== id),
      
@@ -77,7 +79,7 @@ const mutations = {
         }
         pict.title = payload.title;
         pict.url = payload.url;
-        pict.thumbUrl = payload.thumbUrl;
+        pict.thumbUrl = payload.thumbnailUrl;
         pict.description = payload.description;
      
         state.Pictures.push(pict);
@@ -92,7 +94,7 @@ const mutations = {
     SET_THUMBS: (state, width, height)=>{
         if(width <= 640 || height <= 640){
             for(let pic in state.Pictures){
-                pic.thumbUrl.replace("thumbs", "thumbsmall");
+                pic.thumbnailUrl.replace("thumbs", "thumbsmall");
             }
         }
     }
@@ -116,14 +118,14 @@ const methods = {
     },
         
     makePicture(){
-        let picture = {id:"", title:"", url:"", thumbUrl:"", description:""};
+        let picture = {id:"", title:"", url:"", thumbnailUrl:"", description:""};
         return picture;
     },
 };
     
 const getters = {
-   // getPictures: () => state.Pictures,
-    getPicture: (an_id)=>{
+    getPictures: () => state.Pictures,
+    get_the_Picture: (an_id)=>{
         let pic = methods.makePicture();
         if(state.pictures){
             pic = state.filter(state.Pictures.id === an_id);
