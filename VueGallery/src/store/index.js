@@ -4,7 +4,7 @@ import {v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 Vue.use(Vuex, axios);
-
+const conn = "PUT A VALUE HERE AND NEVER SHARE ON GITHUB";
 const state = {
     Pictures:[]
 };
@@ -13,12 +13,18 @@ const actions = {
     
 //Replace jsonplaceholder with backend url
 async getPictures({commit}){  
-    const response = await axios.get('https://jsonplaceholder.typicode.com/photos',{params:{_limit: 20}})
-        .catch(function(error){
-            console.log(error);
+    Vue.http.interceptors.push(function(request) {
+        request.method = 'GET';
+        request.headers.set('Access-Control-Allow-Origin', 'true');
     });
-    console.log(response.data);
-    commit('set_Pictures', response.data)
+    const response = await axios.get(conn, {params:{_limit: 20}}, {Headers:{}})
+    .then( ()=>{console.log(response.data);
+    commit('set_Pictures', response.data)})    
+    .catch(function(error){
+        console.log(error);
+    });
+    // console.log(response.data);
+    // commit('set_Pictures', response.data)
 },
 async getPicture({context}, id){
     const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`)
@@ -36,7 +42,7 @@ async editPicture({commit}, id){
     commit('SET_PICTURE', response.data)
 },
 async setPicture({commit}, picture){
-    const response = await axios.post('uhttps://jsonplaceholder.typicode.com/photos', picture)
+    const response = await axios.post('https://jsonplaceholder.typicode.com/photos', picture)
         .catch(function(error){
             console.log(error);
     });

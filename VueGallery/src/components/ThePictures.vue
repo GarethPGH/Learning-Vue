@@ -1,13 +1,15 @@
 <template>
     <div> 
         <AddPicture></AddPicture>
-        <div v-if="Pictures">
-            <div v-for="pic in Pictures" v-bind:key="pic.id">
-                <div v-bind:style="normal">
-                    <h4>{{pic.title}}</h4>
-                    <router-link to = "/pic"><img v-bind:src="pic.thumbnailUrl" v-bind:alt="pic.description" @onclick="openThePicture()" v-bind:style="normal"/></router-link>
+        <div v-if="Pictures" >
+            <div class = "container">
+                <div v-for="pic in Pictures" v-bind:key="pic.id">
+                    <div>
+                        <h4>{{pic.title}}</h4>
+                        <router-link to = "/pic"><img v-bind:src="pic.thumbnailUrl" v-bind:alt="pic.description" @onclick="openThePicture()"/></router-link>
+                    </div>
+                    <OpenPicture v-if = "display2 === block" @emitting = "emitting()"></OpenPicture>
                 </div>
-                <OpenPicture v-if = "display2 === block" @emitting = "emitting()"></OpenPicture>
             </div>
         </div>
     </div>
@@ -28,19 +30,9 @@ export default {
        OpenPicture,
        AddPicture
     },
-   //Use CSS Grid to do layout, the dynamic flex layout isn't working for automatic placement
+
     data:()=>{ 
         return {
-            normal:{
-                display: "flex",
-                float: "left",
-                padding: "2%",
-                margin: "2%",
-                "justify-content":"space-between",
-                "flex-direction":"column",
-                "max-width":"50vw",
-                "max-height":"50vh",
-            },
             display2: "none",
             id: "",
             title: "",
@@ -114,3 +106,13 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .container{
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: 33% 33% 33%;
+        column-gap: 2%;
+        padding: 2%;
+        margin: 2%;
+    }
+</style>
