@@ -4,37 +4,42 @@ import {v4 as uuidv4 } from 'uuid';
 import axios from 'axios';
 
 Vue.use(Vuex, axios);
-const conn = "PUT A VALUE HERE AND NEVER SHARE ON GITHUB";
+const conn = "Endpoint Here";
+
 const state = {
     Pictures:[]
 };
 
 const actions = {
     
-//Replace jsonplaceholder with backend url
 async getPictures({commit}){  
-    Vue.http.interceptors.push(function(request) {
-        request.method = 'GET';
-        request.headers.set('Access-Control-Allow-Origin', 'true');
-    });
-    const response = await axios.get(conn, {params:{_limit: 20}}, {Headers:{}})
-    .then( ()=>{console.log(response.data);
-    commit('set_Pictures', response.data)})    
-    .catch(function(error){
-        console.log(error);
-    });
-    // console.log(response.data);
-    // commit('set_Pictures', response.data)
+ 
+    const response = await axios({
+            url: conn,
+            method: 'GET',
+            params: {_limit: 20}, 
+        })
+        .then( ()=>{console.log(response.data);
+            commit('set_Pictures', response.data)})    
+        .catch(function(error){
+            console.log(error);
+        });
 },
 async getPicture({context}, id){
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/photos/${id}`)
+    const response = await axios({
+        url: conn + `${id}`,
+        method: 'GET',
+        })
         .catch(function(error){
             console.log(error);
     });
     context.getters.getPicture(response.id)
 },
 async editPicture({commit}, id){
-    const response = await axios.put(`https://jsonplaceholder.typicode.com/photos/${id}`)
+    const response = await axios({
+        url: conn + `${id}`,
+        method: 'PUT',
+        })
         .catch(function(error){
             console.log(error);
     });
@@ -42,14 +47,26 @@ async editPicture({commit}, id){
     commit('SET_PICTURE', response.data)
 },
 async setPicture({commit}, picture){
-    const response = await axios.post('https://jsonplaceholder.typicode.com/photos', picture)
+    const response = await axios({
+        url: conn,
+        method: 'POST',
+        data:{
+            id: picture.id,
+            title: picture.title,
+            url: picture.url,
+            thumbUrl: picture.thumbUrl,
+            description: picture.description
+        },
+        })
         .catch(function(error){
             console.log(error);
     });
     commit('SET_PICTURE', response.data)
 },
 async deletePicture({commit}, id){
-    await axios.delete(`https://jsonplaceholder.typicode.com/photos/${id}`)
+    await axios(conn +`${id}`,  {
+        method: 'DELETE', 
+        })
         .catch(function(error){
             console.log(error);
     }),
